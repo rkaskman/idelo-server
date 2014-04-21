@@ -1,0 +1,37 @@
+<ol class="breadcrumb">
+	<li class="active">All Citizens</li>
+</ol>
+<div class="row">
+<div class="col-sm-12">
+		<form class="form-horizontal ng-pristine ng-valid" role="form">
+			<div class="form-group">
+				<label for="inputEmail3" class="col-sm-1 control-label">Filter
+					: </label>
+				<div class="col-sm-3">
+					<input ng-model="query" class="form-control ng-pristine ng-valid" placeholder="Type To Search" type="text">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<table class="table table-striped ">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Name</th>
+			<th>ID</th>
+			<th>Number Of Complaints</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="citizen in citizens | filter:query">
+			<td>{{$index + 1}}</td>
+			<td>{{citizen.name}}</td>
+			<td>{{citizen.nick}}</td>
+			<td>{{citizen.numOfComplaints}}</td>
+			<td><a href="#citizen/{{citizen.id}}" type="button"
+				class="btn btn-info btn-xs">View Profile </a></td>
+		</tr>
+	</tbody>
+</table>

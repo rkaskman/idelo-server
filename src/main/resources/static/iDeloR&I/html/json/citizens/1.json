@@ -1,0 +1,11 @@
+{
+	"id" : "1",
+	"name" : "Mark Otto",
+	"sex" : "Male",
+	"dateOfBirth" : "15.11.1978",
+	"address" : "Akadeemia tee 7/2",
+	"number" : "323566728",
+	"nick" : "@mdo",
+	"numOfComplaints" : "3",
+	"img" : "otto.jpg"
+}

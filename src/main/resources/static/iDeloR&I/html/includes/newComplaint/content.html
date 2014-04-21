@@ -1,0 +1,62 @@
+<div class="jumbotron">
+
+
+    <form role="form" class=" violation-form" method="post" role="form" onsubmit="return(validateComplaintForm())">
+        <h2 style="padding-bottom: 5%" class="form-signin-heading">Provide the information about violation</h2>
+        <input class="form-control" type="text" placeholder="Episode name" required autofocus>
+        <input class="form-control" id="datetimepicker" placeholder="Date & Time" required type="text">
+        <div id="violationTags"></div>
+        <textarea class="form-control" required placeholder="Violation details" rows="10" cols="40"
+                  style="resize: none"></textarea>
+        <br>
+        <label style="padding: 3px;">Mark violation location:</label>
+
+        <div id="map_canvas"></div>
+        <input type="hidden" required id="latFld">
+        <input type="hidden" required id="lngFld">
+        <br>
+
+        <div class="form-group">
+            <label style="padding: 3px;">Add violation images:</label>
+            <table width="100%" border="1" cellspacing=0 cellpadding=5>
+                <tr>
+                    <td align="left" height="105" style="background-color: white" ondragenter="return false"
+                        ondragover="return false" ondrop="dropIt(event)">
+                        <output id="thumbs"></output>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style="font-size: inherit">Drag & drop or choose images from your local file system: <input
+                                type="file" id="input" size="10" multiple="true" onchange="imagesSelected(this.files)"/>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+        <hr>
+    </form>
+    <script>
+        $(function () {
+            $("#violationTags").tags({
+                restrictTo: ["Non-patriotic behavior", "Ultra-violence", "Urinating in public"],
+                suggestions: ["Non-patriotic behavior", "Ultra-violence", "Urinating in public"],
+                promptText: "   Violation tags",
+                suggestOnClick: true
+            });
+
+             loadScript();
+        });
+
+        function loadScript() {
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+
+            script.src = 'https://maps.googleapis.com/maps/api/js?v=AIzaSyCzYjvCXkNylxgzNlWHmuWwSmJmWeqm61k&sensor=false&' +
+                    'callback=initMap';
+            document.body.appendChild(script);
+        }
+
+    </script>
+</div>

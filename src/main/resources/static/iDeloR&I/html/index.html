@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html class="no-js lt-ie9" xmlns:ng="http://angularjs.org" id="ng-app" ng-app="iDeloApp"> 
+<![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js" ng-app="iDeloApp" lang="en">
+<!--<![endif]-->
+<head>
+<title>Welcome to Molvania iDelo!</title>
+
+<!-- META -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title ng-bind="header"></title>
+<meta name="description" content="">
+
+<!-- MODULES -->
+<script src="../libs/jquery/jquery.min.js"></script>
+
+<script src="../libs/bootstrap/js/bootstrap.min.js"></script>
+<link href="../libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="../libs/tags/tagmanager.css" rel="stylesheet">
+
+<script src="../libs/angular/angular.min.js"></script>
+<script src="../libs/angular/angular-route.min.js"></script>
+
+<script src="../libs/datetimepicker/jquery.datetimepicker.js"></script>
+<script src="../libs/bootstrap-tags/js/bootstrap-tags.js"></script>
+<link href="../libs/datetimepicker/jquery.datetimepicker.css"
+	rel="stylesheet">
+	
+<link href="../libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link type="text/css"
+	href="../libs/bootstrap-tags/css/bootstrap-tags.css" rel="stylesheet" />
+
+
+
+<!-- CSS -->
+<link href="../css/common/common.css" rel="stylesheet">
+<link href="../css/common/navbar-fixed-top.css" rel="stylesheet">
+
+<!-- JS -->
+<script src="../js/common/mapUtil.js"></script>
+<script src="../js/common/smartNavbar.js"></script>
+<script src="../js/common/smartFooter.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/controllers.js"></script>
+<script src="../js/services.js"></script>
+
+</head>
+
+<body ng-controller="mainCtrl">
+	<div class="container">
+		<div ng-include="'includes/common/navbar.html'"></div>
+		<div class="view-container">
+			<div ng-view="" class="view-frame"></div>
+		</div>
+		<hr>
+		<div ng-include="'includes/common/footer.html'"></div>
+	</div>
+</body>
+</html>

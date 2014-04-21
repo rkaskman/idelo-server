@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html ng-app="iDeloApp" lang="en">
+<head>
+    <title>Welcome to Molvania iDelo!</title>
+
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Roman Kaskman & Ilja Gužovski">
+    <link rel="shortcut icon" href="../assets/ico/favicon.png">
+
+    <!-- MODULES -->
+    <script src="../libs/jquery/jquery.min.js"></script>
+    <script src="../libs/bootstrap/js/bootstrap.min.js"></script>
+    <link href="../libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="../css/unregistered/common.css" rel="stylesheet">
+
+    <!-- JS -->
+</head>
+
+<body>
+<div class="site-wrapper">
+
+    <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+            <div class="masthead clearfix">
+                <div class="inner">
+                    <h3 class="masthead-brand">iDelo</h3>
+                    <ul class="nav masthead-nav">
+                        <li><a href="unregistered.html">Home</a></li>
+                        <li class="active"><a href="register.html">Register</a></li>
+                        <li><a href="login.html">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="inner cover">
+                <h1 class="cover-heading">Fill Out Fields</h1>
+
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-1">
+                        <form class="form-horizontal" action="index.html" method="get"
+                              role="form" onsubmit="return(validateRegistrationForm())">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">E-Mail</label>
+
+                                <div class="col-sm-6">
+                                    <input type="email" class="form-control"
+                                           placeholder="Email address" required autofocus>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Password</label>
+
+                                <div class="col-sm-6">
+                                    <input type="password" id="password1" class="form-control"
+                                           placeholder="Password" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Password
+                                    confirm</label>
+
+                                <div class="col-sm-6">
+                                    <input type="password"
+                                           id="password2" class="form-control"
+                                           placeholder="Password Confirmation" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+
+                                <div class="col-sm-6">
+                                    <input class="form-control" id="name"
+                                           placeholder="Name" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Sex</label>
+
+                                <div class="col-sm-6">
+                                    <div class="radio">
+                                        <input type="radio" name="optionsRadios" id="optionsRadios1"
+                                               value="option1" checked> <label> Male </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label> <input type="radio" name="optionsRadios"
+                                                       id="optionsRadios2" value="option2">Female
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Date
+                                    Of Birth</label>
+
+                                <div class="col-sm-6">
+                                    <input class="form-control" id="dateOfBirth"
+                                           placeholder="Date Of Birth" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Address</label>
+
+                                <div class="col-sm-6">
+                                    <input class="form-control" id="inputEmail3"
+                                           placeholder="Address" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-2">
+                                    <button type="submit" class="btn btn-info btn-lg">Register</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="mastfoot">-->
+                <!--<div class="inner">-->
+                    <!--<p>Roman Kaskman & Ilja Guzovski</p>-->
+                <!--</div>-->
+            <!--</div>-->
+
+        </div>
+
+    </div>
+    <script>
+        function validateRegistrationForm() {
+            var nameReg = /^[a-z ,.'-]+$/i;
+            var birthDateReg = /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/;
+
+            $('.help-inline').remove();
+
+            if (!nameReg.test($('#name').val())) {
+                $('#name').after('<span class="help-inline">Non-alphabetic symbols are present!</span>');
+                return false;
+            }
+            if ($('#password1').val() != $('#password2').val()) {
+                $('#password2').after('<span class="help-inline">The passwords don\'t match!</span>');
+                return false;
+            }
+            if ($('#password1').val().length < 8) {
+                $('#password1').after('<span class="help-inline">The passwords must be at least 8 symbols long!</span>');
+                return false;
+            }
+            if(!birthDateReg.test($('#dateOfBirth').val())) {
+                $('#dateOfBirth').after('<span class="help-inline">Birth date should be in yyyy-MM-dd format!</span>');
+                return false;
+            }
+            return true;
+        }
+    </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+[ 
+{
+	"id" : "0",
+	"name" : "Le Sad Frog",
+	"nick" : " @sadfrg",
+	"numOfComplaints" : "3"
+},
+  {
+	"id" : "1",
+	"name" : "Mark Otto",
+	"nick" : "@mdo",
+	"numOfComplaints" : "3"
+}, {
+	"id" : "2",
+	"name" : "Ilja Brno",
+	"nick" : "@ilbr",
+	"numOfComplaints" : "2"
+}, {
+	"id" : "3",
+	"name" : "Roman KK",
+	"nick" : "@romkk",
+	"numOfComplaints" : "2"
+}, {
+	"id" : "4",
+	"name" : "Valeri 007",
+	"nick" : "@val",
+	"numOfComplaints" : "2"
+}, {
+	"id" : "5",
+	"name" : "Tonis teh Great",
+	"nick" : "@ton",
+	"numOfComplaints" : "0"
+} ]

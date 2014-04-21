@@ -1,0 +1,60 @@
+<ol class="breadcrumb">
+	<li><a href="#allCitizens">All Citizens</a></li>
+	<li><a href="#citizen/0">Le Sad Frog</a></li>
+	<li><a href="#complaints/0">Complaints</a></li>
+	<li class="active">Complaint #1</li>
+</ol>
+<div id="complaint" class="container">
+    <script>
+        var crimeTags;
+        var mapLng;
+        var mapLtd;
+        $(document).ready($.getJSON("json/complaints.json", function (data) {
+
+            complaintInfo = '<div class="row"><div class="col-md-9">';
+            var complaint = data['complaints'][0];
+            complaintInfo += '<dl><dt>Episode:</dt><dd>' + complaint.episode + '</dd>';
+            complaintInfo += '<dt>Date & Time:</dt><dd>' + complaint.dateTime + '</dd>';
+            complaintInfo += '<dt>Tags:</dt><dd><div id="readOnlyTags" class="bootstrap-tags bootstrap-3">';
+            complaintInfo += '<div class="tags">'
+
+            for (i = 0; i < complaint.tags.length; i++) {
+                complaintInfo += '<div class="tag label btn-info md"> <span>&nbsp;&nbsp; ' + complaint.tags[i] + '&nbsp;&nbsp;</span>      </div>'
+            }
+
+            complaintInfo += '</div></div></dd><br><br>';
+            complaintInfo += '<dt>Description:</dt><dd>' + complaint.description +'</dd>'
+
+            mapLtd = complaint.location.lat;
+            mapLng = complaint.location.lng;
+
+            complaintInfo += '<dt>Location:</dt><dd><div id="map_canvas"></div></dd>'
+
+            complaintInfo += '<dt>Images:<dd><div class="row">';
+
+            for ( i = 0; i < complaint.images.length; i++) {
+                complaintInfo += '<div class="col-xs-3"><a href="' + complaint.images[i] +'" class="thumbnail" target="_blank"><img class="img-responsive" src="' +  complaint.images[i] +'"></a></div>';
+            }
+            complaintInfo += '</div></dd></dt>'
+            complaintInfo +=  '</dl></div>' ;
+
+
+            loadScript();
+            $('#complaint').append(complaintInfo);
+
+        }));
+
+        function loadScript() {
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+
+            script.src = 'https://maps.googleapis.com/maps/api/js?v=AIzaSyCzYjvCXkNylxgzNlWHmuWwSmJmWeqm61k&sensor=false&' +
+                    'callback=loadMapWrapper';
+            document.body.appendChild(script);
+        }
+        // workaround to place into callback
+        function loadMapWrapper() {
+            initDisplayMap(mapLtd, mapLng);
+        }
+    </script>
+</div>

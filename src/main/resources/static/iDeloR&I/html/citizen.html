@@ -1,0 +1,43 @@
+<style>
+dl>dt {
+	font-size: 18px !important;
+	font-weight: bolder;
+}
+
+dl>dd {
+	font-size: 16px !important;
+	font-weight: lighter;
+	padding-left: 30px;
+}
+</style>
+<ol class="breadcrumb">
+	<li><a href="#allCitizens">All Citizens</a></li>
+	<li class="active">{{citizen.name}}</li>
+</ol>
+
+<div class="row">
+	<div class="col-md-3">
+		<img ng-src="../img/citizen/{{citizen.img}} " height="400px" width="300px"
+			alt="..." class="img-thumbnail">
+	</div>
+	<div class="col-md-9">
+		<h3>Citizen #{{citizen.number}} ({{citizen.nick}}) profile</h3>
+		<hr>
+		<dl>
+			<dt>Name:</dt>
+			<dd>{{citizen.name}}</dd>
+			<dt>Sex:</dt>
+			<dd>{{citizen.sex}}</dd>
+			<dt>Date Of Birth:</dt>
+			<dd>{{citizen.dateOfBirth}}</dd>
+			<dt>Address:</dt>
+			<dd>{{citizen.address}}</dd>
+		</dl>
+		<p>
+			<a href="#/complaints/{{citizen.id}}" class="btn btn-primary btn-lg">View His
+				Complaints (3)</a> &nbsp;
+			<button type="button" disabled class="btn btn-default btn-lg">View
+				Complaints On Him</button>
+		</p>
+	</div>
+</div>

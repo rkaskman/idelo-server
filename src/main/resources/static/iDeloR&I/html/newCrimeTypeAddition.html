@@ -1,0 +1,55 @@
+<div class="jumbotron">
+
+    <style>
+
+        .help-inline {
+            color: #ED5156;
+        }
+
+        label {
+            padding: 3px;
+        }
+
+        #newCrimeTypeForm {
+         max-width: 45%;
+        }
+
+    </style>
+
+    <form role="form" id="newCrimeTypeForm" class="complaint-form" action="index.html" onsubmit="return(validateTagAdditionForm())">
+        <h2 style="padding-bottom: 5%" class="form-signin-heading">Add new violation tags</h2>
+
+        <div id="violationTags"></div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+        <hr>
+    </form>
+    <script>
+        $(function () {
+            $("#violationTags").tags(
+                    {
+                        tagSize: "lg",
+                        promptText: "   Add new violation tag"
+                    });
+        });
+
+        $('html, body').animate({ scrollTop: 0 }, 0);
+        function validateTagAdditionForm() {
+            $('.help-inline').remove();
+
+            if ($('.tag').length == 0) {
+                $('#violationTags').after('<span class="help-inline">You should provide at least one tag!</span>');
+                return false;
+            }
+            return true;
+        }
+
+        $('#newCrimeTypeForm').bind("keyup keypress", function(e) {
+            var code = e.keyCode || e.which;
+            if (code  == 13) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+    </script>
+</div>

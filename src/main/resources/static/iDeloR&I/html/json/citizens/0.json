@@ -1,0 +1,11 @@
+{
+	"id" : "0",
+	"name" : "Le Sad Frog",
+	"sex" : "Male",
+	"dateOfBirth" : "15.11.1992",
+	"address" : "Streets Of Mustamae, Tallinn",
+	"number" : "323566778",
+	"nick" : "@sadfrg",
+	"numOfComplaints" : "3",
+	"img" : "sadfrog.png"
+}

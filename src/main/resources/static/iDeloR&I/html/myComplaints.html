@@ -1,0 +1,28 @@
+<ol class="breadcrumb">
+	<li class="active">My Complaints</li>
+</ol>
+<table class="table table-striped ">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Name</th>
+			<th>ID</th>
+			<th>Type Of Violation<span class="caret"></span></th>
+			<th>Date Added</th>
+			<th>Status</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="complaint in complaints.list">
+			<td>{{$index + 1}}</td>
+			<td>{{complaint.person.name}}</td>
+			<td>{{complaint.person.nick}}</td>
+			<td>{{complaint.type}}</td>
+			<td>{{complaint.date}}</td>
+			<td>{{complaint.status}}</td>
+			<td><a href="#complaint" class="btn btn-default">View
+					Details</a></td>
+		</tr>
+	</tbody>
+</table>
