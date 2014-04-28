@@ -2,6 +2,6 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
              version="1.0">
     <persistence-unit name="userPersistenceUnit" transaction-type="RESOURCE_LOCAL" >
-        <class>idelo.model.City</class>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
     </persistence-unit>
 </persistence>
