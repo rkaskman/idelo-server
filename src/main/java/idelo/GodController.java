@@ -8,15 +8,13 @@ import idelo.model.complaint.StatusOfComplaint;
 import idelo.model.complaint.TypeOfComplaint;
 import idelo.repository.CitizenRepository;
 import idelo.repository.ComplaintRepository;
-import idelo.response.AllComplaintsResponse;
+import idelo.response.JSONBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -33,8 +31,8 @@ public class GodController {
 
     @RequestMapping(value="/get-all-complaints", method = RequestMethod.GET)
     @ResponseBody
-    public AllComplaintsResponse getAllComplaints() {
-        return new AllComplaintsResponse(complaintRepository.findAll());
+    public List getAllComplaints() {
+        return JSONBuilder.getCitizenComplaintsResponse(complaintRepository.findAll());
     }
 
 

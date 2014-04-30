@@ -1,4 +1,4 @@
-package idelo.response;
+package idelo.response.parts;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -29,7 +29,7 @@ public class CitizenResponse {
     private String img;
 
 
-    public CitizenResponse(Citizen citizen) {
+    CitizenResponse(Citizen citizen) {
         this.id = citizen.getId();
         this.name = citizen.getName();
         this.sex = citizen.getSex();

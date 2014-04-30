@@ -1,4 +1,4 @@
-package idelo.response;
+package idelo.response.parts;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import idelo.model.complaint.Complaint;
@@ -15,7 +15,7 @@ public class CitizenComplaintsResponse {
     @JsonProperty(value = "list")
     private List<ComplaintResponse> complaintsOfCitizen = new ArrayList<>();
 
-    CitizenComplaintsResponse(Long authorId, String authorName, List<Complaint> complaintsOfCitizen) {
+    public CitizenComplaintsResponse(Long authorId, String authorName, List<Complaint> complaintsOfCitizen) {
         this.authorId = authorId;
         this.authorName = authorName;
 

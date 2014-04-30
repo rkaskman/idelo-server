@@ -1,7 +1,6 @@
-package idelo.response;
+package idelo.response.parts;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import idelo.model.citzen.Citizen;
 import idelo.model.complaint.Complaint;
 import idelo.model.complaint.StatusOfComplaint;
 import idelo.model.complaint.TypeOfComplaint;
