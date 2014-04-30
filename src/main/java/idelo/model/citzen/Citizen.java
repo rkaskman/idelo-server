@@ -15,50 +15,39 @@ public class Citizen implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    @JsonProperty
     private Long id;
 
-    @JsonProperty
     private String name;
 
-    @JsonProperty
     private Sex sex;
 
-    @JsonProperty
     private Date dateOfBirth;
 
-    @JsonProperty
     private String address;
 
-    @JsonProperty
     private Long number;
 
-    @JsonProperty
     private String nick;
 
-    @OneToMany
-    @JsonProperty
-    private List<Complaint> complaints = new ArrayList<Complaint>();
-
-    @JsonProperty
     private String img;
 
-    @ManyToMany(mappedBy = "listOfCitizenWhoViolated")
-    @JsonProperty
+    @OneToMany(mappedBy = "author")
+    private List<Complaint> complaints = new ArrayList<Complaint>();
+
+    @OneToMany(mappedBy = "victim")
     private List<Complaint> complaintsOnThisCitizen = new ArrayList<Complaint>();
 
 
     public Citizen() {
     }
 
-    public Citizen(String name, Sex sex) {
+    public Citizen(String name, Sex sex, Date dateOfBirth, String address, Long number, String nick) {
         this.name = name;
         this.sex = sex;
-    }
-
-    @JsonProperty(value = "numOfComplaints")
-    private Integer getNumberOfComplaints(){
-        return complaints.size();
+        this.dateOfBirth = dateOfBirth;
+        this.address = address;
+        this.number = number;
+        this.nick = nick;
     }
 
     //GETTERS SETTERS
@@ -155,5 +144,22 @@ public class Citizen implements Serializable {
                 ", name='" + name + '\'' +
                 ", id=" + id +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Citizen citizen = (Citizen) o;
+
+        if (id != null ? !id.equals(citizen.id) : citizen.id != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }

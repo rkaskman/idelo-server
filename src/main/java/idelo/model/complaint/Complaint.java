@@ -16,28 +16,33 @@ public class Complaint implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    @JsonProperty
     private Long id;
 
-    @ManyToOne
-    @JsonProperty
-    private Citizen author;
+    private TypeOfComplaint typeOfComplaint;
 
-    @ManyToMany
-    @JsonProperty(value = "list")
-    private Set<Citizen> listOfCitizenWhoViolated = new HashSet<Citizen>();
-
-    @JsonProperty(value = "type")
-    private  TypeOfComplaint typeOfComplaint;
-
-    @JsonProperty(value = "date")
     private Date date;
 
-    @JsonProperty(value = "status")
     private StatusOfComplaint statusOfComplaint;
 
-    @JsonProperty
     private String description;
+
+    @ManyToOne
+    private Citizen author;
+
+    @ManyToOne
+    private Citizen victim;
+
+    public Complaint(TypeOfComplaint typeOfComplaint, Date date, StatusOfComplaint statusOfComplaint, String description, Citizen author, Citizen victim) {
+        this.typeOfComplaint = typeOfComplaint;
+        this.date = date;
+        this.statusOfComplaint = statusOfComplaint;
+        this.description = description;
+        this.author = author;
+        this.victim = victim;
+    }
+
+    public Complaint() {
+    }
 
     public Long getId() {
         return id;
@@ -53,14 +58,6 @@ public class Complaint implements Serializable{
 
     public void setAuthor(Citizen author) {
         this.author = author;
-    }
-
-    public Set<Citizen> getListOfCitizenWhoViolated() {
-        return listOfCitizenWhoViolated;
-    }
-
-    public void setListOfCitizenWhoViolated(Set<Citizen> listOfCitizenWhoViolated) {
-        this.listOfCitizenWhoViolated = listOfCitizenWhoViolated;
     }
 
     public TypeOfComplaint getTypeOfComplaint() {
@@ -95,6 +92,14 @@ public class Complaint implements Serializable{
         this.description = description;
     }
 
+    public Citizen getVictim() {
+        return victim;
+    }
+
+    public void setVictim(Citizen victim) {
+        this.victim = victim;
+    }
+
     @Override
     public String toString() {
         return "Complaint{" +
@@ -105,5 +110,22 @@ public class Complaint implements Serializable{
                 ", author=" + author +
                 ", id=" + id +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Complaint complaint = (Complaint) o;
+
+        if (id != null ? !id.equals(complaint.id) : complaint.id != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }

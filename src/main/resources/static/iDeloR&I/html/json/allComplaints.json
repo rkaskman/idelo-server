@@ -1,51 +1,57 @@
 {
-	"authorId" : "0",
-	"authorName" : "Le Sad Frog",
-	"list" : [ {
-		"person" : {
-			"id" : "1",
-			"name" : "Mark Otto",
-			"nick" : "@mdo"
-		},
-		"type" : "Anti-Government talks",
-		"date" : "1/2/2011",
-		"status" : "New"
-	}, {
-		"person" : {
-			"id" : "2",
-			"name" : "Ilja Brno",
-			"nick" : "@ilbr"
-		},
-		"type" : "Anti-Government talks",
-		"date" : "6/11/2001",
-		"status" : "Resolved"
-	}, {
-		"person" : {
-			"id" : "3",
-			"name" : "Roman KK",
-			"nick" : "@romkk"
-		},
-		"type" : "Dangerous Philosophing",
-		"date" : "7/21/2011",
-		"status" : "Resolved"
-	}, {
-		"person" : {
-			"id" : "4",
-			"name" : "Valeri 007",
-			"nick" : "@val"
-		},
-		"type" : "BlackMailing",
-		"date" : "1/12/1995",
-		"status" : "Expired"
-	}, {
-		"person" : {
-			"id" : "5",
-			"name" : "Tonis teh Great",
-			"nick" : "@ton"
-		},
-		"type" : "Anti-Government talks",
-		"date" : "4/3/2013",
-		"status" : "In Progress"
-	} ]
+    "authorId": "0",
+    "authorName": "Le Sad Frog",
+    "list": [
+        {
+            "person": {
+                "id": "1",
+                "name": "Mark Otto",
+                "nick": "@mdo"
+            },
+            "type": "Anti-Government talks",
+            "date": "1/2/2011",
+            "status": "New"
+        },
+        {
+            "person": {
+                "id": "2",
+                "name": "Ilja Brno",
+                "nick": "@ilbr"
+            },
+            "type": "Anti-Government talks",
+            "date": "6/11/2001",
+            "status": "Resolved"
+        },
+        {
+            "person": {
+                "id": "3",
+                "name": "Roman KK",
+                "nick": "@romkk"
+            },
+            "type": "Dangerous Philosophing",
+            "date": "7/21/2011",
+            "status": "Resolved"
+        },
+        {
+            "person": {
+                "id": "4",
+                "name": "Valeri 007",
+                "nick": "@val"
+            },
+            "type": "BlackMailing",
+            "date": "1/12/1995",
+            "status": "Expired"
+        },
+        {
+            "person": {
+                "id": "5",
+                "name": "Tonis teh Great",
+                "nick": "@ton"
+            },
+            "type": "Anti-Government talks",
+            "date": "4/3/2013",
+            "status": "In Progress"
+        }
+    ]
 
 }
