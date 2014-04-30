@@ -1,5 +1,8 @@
 package idelo.response.parts;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import idelo.model.citzen.Citizen;

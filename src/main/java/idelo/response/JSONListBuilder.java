@@ -14,7 +14,7 @@ import java.util.List;
  * Thin Controller for json, may become god class, so be ready for decoupling.
  * Hint: maybe it is good idea to create services for this JSON controller???
  * */
-public class JSONBuilder {
+public class JSONListBuilder {
 
     public static List<CitizenComplaintsResponse> getAllCitizenComplaintsResponse(List<Complaint> allComplaints) {
         List<CitizenComplaintsResponse> citizenComplaintsResponse = new ArrayList<>();
@@ -37,7 +37,6 @@ public class JSONBuilder {
         for (Citizen citizen : allCitizen) {
             allCitizenResponse.add(new CitizenResponse(citizen));
         }
-
         return allCitizenResponse;
     }
 

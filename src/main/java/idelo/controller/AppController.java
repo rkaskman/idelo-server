@@ -1,4 +1,4 @@
-package idelo;
+package idelo.controller;
 
 
 import idelo.model.citzen.Citizen;
@@ -8,7 +8,6 @@ import idelo.model.complaint.StatusOfComplaint;
 import idelo.model.complaint.TypeOfComplaint;
 import idelo.repository.CitizenRepository;
 import idelo.repository.ComplaintRepository;
-import idelo.response.JSONBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,31 +15,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
-import java.util.List;
 
 
 @Controller
-public class GodController {
+public class AppController {
 
     @Autowired
     private CitizenRepository citizenRepository;
 
     @Autowired
     private ComplaintRepository complaintRepository;
-
-
-    @RequestMapping(value="/get-all-complaints", method = RequestMethod.GET)
-    @ResponseBody
-    public List getAllComplaints() {
-        return JSONBuilder.getAllCitizenComplaintsResponse(complaintRepository.findAll());
-    }
-
-    @RequestMapping(value="/get-all-citizen", method = RequestMethod.GET)
-    @ResponseBody
-    public List getAllCitizen() {
-        return JSONBuilder.getAllCitizenResponse(citizenRepository.findAll());
-    }
-
 
     @RequestMapping(value="/generate", method = RequestMethod.GET)
     @ResponseBody

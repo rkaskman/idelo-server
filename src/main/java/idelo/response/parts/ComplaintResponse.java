@@ -18,7 +18,7 @@ public class ComplaintResponse {
     @JsonProperty(value = "status")
     private StatusOfComplaint statusOfComplaint;
 
-    ComplaintResponse(Complaint complaint){
+    public ComplaintResponse(Complaint complaint){
         this.victim = new CitizenResponse(complaint.getVictim());
         this.typeOfComplaint  = complaint.getTypeOfComplaint();
         this.date = complaint.getDate();
