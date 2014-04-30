@@ -5,7 +5,7 @@ iDeloApp.controller('ComplaintsCtrl', [
 		'$routeParams',
 		'$http',
 		function($scope, $routeParams, $http) {
-			$http.get('json/complaints/' + $routeParams.citizenId + '.json')
+			$http.get('/get-complaint/' + $routeParams.citizenId)
 					.success(function(data) {
 						$scope.complaints = data;
 					});
@@ -16,7 +16,7 @@ iDeloApp.controller('MyComplaintsCtrl', [
 		'$routeParams',
 		'$http','Auth',
 		function($scope, $routeParams, $http, Auth) {
-			$http.get('json/complaints/' + Auth.getUser() + '.json').success(
+			$http.get('/get-complaint/' + Auth.getUser()).success(
 					function(data) {
 						$scope.complaints = data;
 					});
@@ -24,7 +24,7 @@ iDeloApp.controller('MyComplaintsCtrl', [
 
 iDeloApp.controller('CitizensCtrl', [ '$scope', '$http',
 		function($scope, $http) {
-			$http.get('json/allCitizens.json').success(function(data) {
+			$http.get('/get-all-citizen').success(function(data) {
 				$scope.citizens = data;
 			});
 			$scope.orderProp = 'type';
@@ -35,7 +35,7 @@ iDeloApp.controller('CitizenCtrl', [
 		'$routeParams',
 		'$http',
 		function($scope, $routeParams, $http) {
-			$http.get('json/citizens/' + $routeParams.citizenId + '.json')
+			$http.get('/get-citizen/' + $routeParams.citizenId)
 					.success(function(data) {
 						$scope.citizen = data;
 					});
