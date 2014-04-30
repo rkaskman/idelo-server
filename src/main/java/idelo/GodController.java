@@ -32,7 +32,13 @@ public class GodController {
     @RequestMapping(value="/get-all-complaints", method = RequestMethod.GET)
     @ResponseBody
     public List getAllComplaints() {
-        return JSONBuilder.getCitizenComplaintsResponse(complaintRepository.findAll());
+        return JSONBuilder.getAllCitizenComplaintsResponse(complaintRepository.findAll());
+    }
+
+    @RequestMapping(value="/get-all-citizen", method = RequestMethod.GET)
+    @ResponseBody
+    public List getAllCitizen() {
+        return JSONBuilder.getAllCitizenResponse(citizenRepository.findAll());
     }
 
 

@@ -29,7 +29,7 @@ public class CitizenResponse {
     private String img;
 
 
-    CitizenResponse(Citizen citizen) {
+    public CitizenResponse(Citizen citizen) {
         this.id = citizen.getId();
         this.name = citizen.getName();
         this.sex = citizen.getSex();
