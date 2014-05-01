@@ -28,7 +28,8 @@
                var daysToLive = 5;
                today.setTime(today.getTime()+(daysToLive*24*60*60*1000));
                var expires = "expires="+today.toGMTString();
-               document.cookie = "username=JohnDoe@gmail.com;"+expires;
+               document.cookie = "username=JohnDoe123@gmail.com; "+expires;
+               document.cookie = "id=123; "+expires;
            }
 
            $("form#signin").submit(function () {

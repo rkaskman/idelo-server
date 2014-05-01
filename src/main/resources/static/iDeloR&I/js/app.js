@@ -40,10 +40,11 @@ iDeloApp.config([ '$routeProvider', function ($routeProvider) {
     });
 } ]);
 
-iDeloApp.run([ '$rootScope', '$location',
-    function ($rootScope, $location) {
+iDeloApp.run([ '$rootScope', '$location', 'Auth',
+    function ($rootScope, $location, Auth) {
         $rootScope.$on('$routeChangeStart', function () {
             console.log("Route changed");
+            console.log("User is " + Auth.getUser());
         });
     } ]);
 
