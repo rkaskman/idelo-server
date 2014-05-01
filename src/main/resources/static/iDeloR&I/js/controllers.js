@@ -70,10 +70,6 @@ iDeloControllers.controller('LoginCtrl', ['$scope', '$location', 'Auth', functio
             $location.path("/");
         };
 
-        $scope.doSignIn = function(username) {
-            document.cookie="username="+username;
-        };
-
         $scope.logout = function(username) {
             document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
         };
