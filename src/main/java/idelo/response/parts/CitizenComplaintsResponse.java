@@ -13,7 +13,7 @@ public class CitizenComplaintsResponse {
     @JsonProperty
     private String authorName;
     @JsonProperty(value = "list")
-    private List<ComplaintResponse> complaintsOfCitizen = new ArrayList<>();
+    private List<ComplaintResponse> complaintsOfCitizen = new ArrayList();
 
     public CitizenComplaintsResponse(Long authorId, String authorName, List<Complaint> complaintsOfCitizen) {
         this.authorId = authorId;

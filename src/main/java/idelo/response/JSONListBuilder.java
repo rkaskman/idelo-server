@@ -17,9 +17,9 @@ import java.util.List;
 public class JSONListBuilder {
 
     public static List<CitizenComplaintsResponse> getAllCitizenComplaintsResponse(List<Complaint> allComplaints) {
-        List<CitizenComplaintsResponse> citizenComplaintsResponse = new ArrayList<>();
+        List<CitizenComplaintsResponse> citizenComplaintsResponse = new ArrayList();
 
-        HashSet<Citizen> authors = new HashSet<>();
+        HashSet<Citizen> authors = new HashSet();
         for (Complaint complaint : allComplaints) {
             authors.add(complaint.getAuthor());
         }
@@ -32,7 +32,7 @@ public class JSONListBuilder {
     }
 
     public static List<CitizenResponse> getAllCitizenResponse(List<Citizen> allCitizen) {
-        List<CitizenResponse> allCitizenResponse = new ArrayList<>();
+        List<CitizenResponse> allCitizenResponse = new ArrayList();
 
         for (Citizen citizen : allCitizen) {
             allCitizenResponse.add(new CitizenResponse(citizen));
