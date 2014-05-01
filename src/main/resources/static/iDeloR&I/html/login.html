@@ -21,6 +21,22 @@
 <link href="../css/unregistered/common.css" rel="stylesheet">
 
 <!-- JS  -->
+   <script>
+       $(document).ready(function(){
+           function createCookie() {
+               var today = new Date();
+               var daysToLive = 5;
+               today.setTime(today.getTime()+(daysToLive*24*60*60*1000));
+               var expires = "expires="+today.toGMTString();
+               document.cookie = "username=JohnDoe@gmail.com;"+expires;
+           }
+
+           $("form#signin").submit(function () {
+               createCookie();
+               alert("The cookie is created!" + document.cookie);
+           });
+       });
+   </script>
 </head>
 
 <body>
@@ -41,7 +57,7 @@
 						</ul>
 					</div>
 				</div>
-				<form method="get" action="index.html" class="form-signin"
+				<form id="signin" method="get" action="index.html" class="form-signin"
 					role="form">
 					<h2 class="form-signin-heading">Please sign in</h2>
 					<input type="email" class="form-control"
