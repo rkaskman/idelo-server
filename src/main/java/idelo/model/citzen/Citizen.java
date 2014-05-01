@@ -1,6 +1,5 @@
 package idelo.model.citzen;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import idelo.model.complaint.Complaint;
 
 import javax.persistence.*;
@@ -8,7 +7,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Citizen implements Serializable {
@@ -33,9 +31,6 @@ public class Citizen implements Serializable {
 
     @OneToMany(mappedBy = "author")
     private List<Complaint> complaints = new ArrayList<Complaint>();
-
-    @OneToMany(mappedBy = "victim")
-    private List<Complaint> complaintsOnThisCitizen = new ArrayList<Complaint>();
 
 
     public Citizen() {
@@ -124,13 +119,6 @@ public class Citizen implements Serializable {
         this.img = img;
     }
 
-    public List<Complaint> getComplaintsOnThisCitizen() {
-        return complaintsOnThisCitizen;
-    }
-
-    public void setComplaintsOnThisCitizen(List<Complaint> complaintsOnThisCitizen) {
-        this.complaintsOnThisCitizen = complaintsOnThisCitizen;
-    }
 
     @Override
     public String toString() {

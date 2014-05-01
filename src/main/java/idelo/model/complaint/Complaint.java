@@ -1,15 +1,12 @@
 package idelo.model.complaint;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import idelo.model.citzen.Citizen;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Complaint implements Serializable{
@@ -18,27 +15,36 @@ public class Complaint implements Serializable{
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
-    private TypeOfComplaint typeOfComplaint;
-
     private Date date;
 
     private StatusOfComplaint statusOfComplaint;
 
     private String description;
 
+    private Double locationLatitude;
+
+    private Double locationLongitude;
+    @OneToMany(mappedBy = "complaint")
+    private Collection<Image> images;
+
+//    private Collection<ComplaintViolationType> complaintViolationTypes;
+
     @ManyToOne
     private Citizen author;
 
-    @ManyToOne
-    private Citizen victim;
-
-    public Complaint(TypeOfComplaint typeOfComplaint, Date date, StatusOfComplaint statusOfComplaint, String description, Citizen author, Citizen victim) {
-        this.typeOfComplaint = typeOfComplaint;
+    // for testing purposes only
+    public Complaint(Date date, StatusOfComplaint statusOfComplaint, String description, Double locationLatitude,
+                     Double locationLongitude, Collection<Image> images,
+//                     Collection<ComplaintViolationType> complaintViolationTypes,
+                     Citizen author) {
         this.date = date;
         this.statusOfComplaint = statusOfComplaint;
         this.description = description;
+        this.locationLatitude = locationLatitude;
+        this.locationLongitude = locationLongitude;
+        this.images = images;
+//        this.complaintViolationTypes = complaintViolationTypes;
         this.author = author;
-        this.victim = victim;
     }
 
     public Complaint() {
@@ -58,14 +64,6 @@ public class Complaint implements Serializable{
 
     public void setAuthor(Citizen author) {
         this.author = author;
-    }
-
-    public TypeOfComplaint getTypeOfComplaint() {
-        return typeOfComplaint;
-    }
-
-    public void setTypeOfComplaint(TypeOfComplaint typeOfComplaint) {
-        this.typeOfComplaint = typeOfComplaint;
     }
 
     public Date getDate() {
@@ -92,13 +90,37 @@ public class Complaint implements Serializable{
         this.description = description;
     }
 
-    public Citizen getVictim() {
-        return victim;
+    public Double getLocationLatitude() {
+        return locationLatitude;
     }
 
-    public void setVictim(Citizen victim) {
-        this.victim = victim;
+    public void setLocationLatitude(Double locationLatitude) {
+        this.locationLatitude = locationLatitude;
     }
+
+    public Double getLocationLongitude() {
+        return locationLongitude;
+    }
+
+    public void setLocationLongitude(Double locationLongitude) {
+        this.locationLongitude = locationLongitude;
+    }
+
+    public Collection<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(Collection<Image> images) {
+        this.images = images;
+    }
+
+//    public Collection<ComplaintViolationType> getComplaintViolationTypes() {
+//        return complaintViolationTypes;
+//    }
+//
+//    public void setComplaintViolationTypes(Collection<ComplaintViolationType> complaintViolationTypes) {
+//        this.complaintViolationTypes = complaintViolationTypes;
+//    }
 
     @Override
     public String toString() {
@@ -106,7 +128,6 @@ public class Complaint implements Serializable{
                 "description='" + description + '\'' +
                 ", statusOfComplaint=" + statusOfComplaint +
                 ", date=" + date +
-                ", typeOfComplaint=" + typeOfComplaint +
                 ", author=" + author +
                 ", id=" + id +
                 '}';
