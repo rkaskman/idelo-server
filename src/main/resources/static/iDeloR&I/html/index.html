@@ -1,10 +1,5 @@
 <!DOCTYPE html>
-<!--[if IE 8]>
-<html class="no-js lt-ie9" xmlns:ng="http://angularjs.org" id="ng-app" ng-app="iDeloApp"> 
-<![endif]-->
-<!--[if gt IE 8]><!--> 
-<html class="no-js" ng-app="iDeloApp" lang="en">
-<!--<![endif]-->
+<html class="no-js" ng-app="iDeloApp" ng-controller="LoginCtrl" lang="en">
 <head>
 <title>Welcome to Molvania iDelo!</title>
 
@@ -42,15 +37,15 @@
 
 <!-- JS -->
 <script src="../js/common/mapUtil.js"></script>
-<script src="../js/common/smartNavbar.js"></script>
-<script src="../js/common/smartFooter.js"></script>
+<!--<script src="../js/common/smartNavbar.js"></script>-->
+<!--<script src="../js/common/smartFooter.js"></script>-->
 <script src="../js/app.js"></script>
-<script src="../js/controllers.js"></script>
 <script src="../js/services.js"></script>
+<script src="../js/controllers.js"></script>
 
 </head>
 
-<body ng-controller="mainCtrl">
+<body>
 	<div class="container">
 		<div ng-include="'includes/common/navbar.html'"></div>
 		<div class="view-container">

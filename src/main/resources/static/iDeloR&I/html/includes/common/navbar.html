@@ -13,10 +13,10 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li id="user-new-complaint"><a href="#newComplaint">New Complaint</a></li>
-                <li id="user-complaints"><a href="#myComplaints">My Complaints</a></li>
-                <li id="all-citizens"><a href="#allCitizens">All Citizens</a></li>
-                <li id="new-crime-add"><a href="#newComplaintType">New Complaint Type</a></li>
+                <li ng-show="showUserMenu" id="user-new-complaint"><a href="#newComplaint">New Complaint</a></li>
+                <li ng-show="showUserMenu"  id="user-complaints"><a href="#myComplaints">My Complaints</a></li>
+                <li ng-show="showAdminMenu" id="all-citizens"><a href="#allCitizens">All Citizens</a></li>
+                <li ng-show="showAdminMenu" id="new-crime-add"><a href="#newComplaintType">New Complaint Type</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -43,7 +43,7 @@
                     <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href=""><span class="glyphicon glyphicon-cog"></span>&nbsp;My profile</a></li>
-                        <li><a href="#asAdmin"><span class="glyphicon glyphicon-flash"></span>&nbsp;Log in as admin</a></li>
+                        <li ng-click="doAdminLogin()"><a href="" ><span class="glyphicon glyphicon-flash"></span>&nbsp;Log in as admin</a></li>
                         <li class="divider"></li>
                         <li><a href="login.html"><span class="glyphicon glyphicon-off"></span>&nbsp;Logout</a></li>
                     </ul>

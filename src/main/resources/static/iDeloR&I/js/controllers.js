@@ -1,6 +1,10 @@
-var complaintsControllers = angular.module('complaintsControllers', []);
+'use strict';
 
-iDeloApp.controller('ComplaintsCtrl', [
+/* Controllers */
+
+var iDeloControllers = angular.module('iDeloControllers', []);
+
+iDeloControllers.controller('ComplaintsCtrl', [
 		'$scope',
 		'$routeParams',
 		'$http',
@@ -11,7 +15,7 @@ iDeloApp.controller('ComplaintsCtrl', [
 					});
 		} ]);
 
-iDeloApp.controller('MyComplaintsCtrl', [
+iDeloControllers.controller('MyComplaintsCtrl', [
 		'$scope',
 		'$routeParams',
 		'$http','Auth',
@@ -22,7 +26,7 @@ iDeloApp.controller('MyComplaintsCtrl', [
 					});
 		} ]);
 
-iDeloApp.controller('CitizensCtrl', [ '$scope', '$http',
+iDeloControllers.controller('CitizensCtrl', [ '$scope', '$http',
 		function($scope, $http) {
 			$http.get('/get-all-citizen').success(function(data) {
 				$scope.citizens = data;
@@ -30,7 +34,7 @@ iDeloApp.controller('CitizensCtrl', [ '$scope', '$http',
 			$scope.orderProp = 'type';
 		} ]);
 
-iDeloApp.controller('CitizenCtrl', [
+iDeloControllers.controller('CitizenCtrl', [
 		'$scope',
 		'$routeParams',
 		'$http',
@@ -41,7 +45,7 @@ iDeloApp.controller('CitizenCtrl', [
 					});
 		} ]);
 
-iDeloApp.controller('SearchCtrl', [ '$scope', '$routeParams', '$http',
+iDeloControllers.controller('SearchCtrl', [ '$scope', '$routeParams', '$http',
 		function($scope, $routeParams, $http) {
 			if ($routeParams.query.indexOf("sa") != -1) {
 				$http.get('json/search/0.json').success(function(data) {
@@ -54,22 +58,15 @@ iDeloApp.controller('SearchCtrl', [ '$scope', '$routeParams', '$http',
 			}
 		} ]);
 
-iDeloApp.controller('LoginCtrl', [ '$scope', 'Auth', function($scope, Auth) {
-		Auth.setUser(12); // Update the state of the user in the app
+iDeloControllers.controller('LoginCtrl', ['$scope', '$location', 'Auth', function($scope,$location, Auth) {
+        $scope.showUserMenu = true;
+        $scope.showAdminMenu = false;
+
+
+        $scope.doAdminLogin = function() {
+            $scope.showUserMenu = false;
+            $scope.showAdminMenu = true;
+            $location.path("/");
+        };
 } ]);
 
-iDeloApp.controller('mainCtrl', [ '$scope', 'Auth', '$location',
-		function($scope, Auth, $location) {
-			$scope.$watch(Auth.isLoggedIn, function(value, oldValue) {
-				if (!value && oldValue) {
-					console.log("Disconnect");
-					$location.path('/');
-				}
-
-				if (value) {
-					console.log("Connect")
-					$location.path('/');
-				}
-
-			}, true);
-		} ]);
