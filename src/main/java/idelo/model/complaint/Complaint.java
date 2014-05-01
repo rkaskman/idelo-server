@@ -27,7 +27,12 @@ public class Complaint implements Serializable{
     @OneToMany(mappedBy = "complaint")
     private Collection<Image> images;
 
-//    private Collection<ComplaintViolationType> complaintViolationTypes;
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(
+            name="complaint_violation_type",
+            joinColumns={@JoinColumn(name="complaint", referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="violation_type", referencedColumnName="id")})
+    private Collection<ViolationType> violationTypes;
 
     @ManyToOne
     private Citizen author;
@@ -35,7 +40,7 @@ public class Complaint implements Serializable{
     // for testing purposes only
     public Complaint(Date date, StatusOfComplaint statusOfComplaint, String description, Double locationLatitude,
                      Double locationLongitude, Collection<Image> images,
-//                     Collection<ComplaintViolationType> complaintViolationTypes,
+                     Collection<ViolationType> violationTypes,
                      Citizen author) {
         this.date = date;
         this.statusOfComplaint = statusOfComplaint;
@@ -43,7 +48,7 @@ public class Complaint implements Serializable{
         this.locationLatitude = locationLatitude;
         this.locationLongitude = locationLongitude;
         this.images = images;
-//        this.complaintViolationTypes = complaintViolationTypes;
+        this.violationTypes = violationTypes;
         this.author = author;
     }
 
@@ -114,13 +119,13 @@ public class Complaint implements Serializable{
         this.images = images;
     }
 
-//    public Collection<ComplaintViolationType> getComplaintViolationTypes() {
-//        return complaintViolationTypes;
-//    }
-//
-//    public void setComplaintViolationTypes(Collection<ComplaintViolationType> complaintViolationTypes) {
-//        this.complaintViolationTypes = complaintViolationTypes;
-//    }
+    public Collection<ViolationType> getViolationTypes() {
+        return violationTypes;
+    }
+
+    public void setViolationTypes(Collection<ViolationType> violationTypes) {
+        this.violationTypes = violationTypes;
+    }
 
     @Override
     public String toString() {

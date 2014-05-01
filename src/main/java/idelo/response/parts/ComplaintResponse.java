@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import idelo.model.complaint.Complaint;
 import idelo.model.complaint.Image;
 import idelo.model.complaint.StatusOfComplaint;
+import idelo.model.complaint.ViolationType;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,8 +14,8 @@ public class ComplaintResponse {
 
     @JsonProperty(value = "person")
     private CitizenResponse author;
-//    @JsonProperty(value = "violationTypes")
-//    private Collection<ComplaintViolationType> complaintViolationTypes;
+    @JsonProperty(value = "violationTypes")
+    private Collection<ViolationTypeResponse> complaintViolationTypes;
     @JsonProperty(value = "date")
     private Date date;
     @JsonProperty(value = "status")
@@ -29,20 +30,22 @@ public class ComplaintResponse {
     private Double locationLongitude;
 
 
-    public ComplaintResponse(Complaint complaint){
+    public ComplaintResponse(Complaint complaint) {
         this.author = new CitizenResponse(complaint.getAuthor());
-//        this.complaintViolationTypes = complaint.getComplaintViolationTypes();
         this.date = complaint.getDate();
         this.statusOfComplaint = complaint.getStatusOfComplaint();
         this.description = complaint.getDescription();
 
         this.locationLatitude = complaint.getLocationLatitude();
         this.locationLongitude = complaint.getLocationLongitude();
-        this.images = new ArrayList<ImageResponse>();
+        this.images = new ArrayList<>();
         for (Image image : complaint.getImages()) {
-           this.images.add(new ImageResponse(image));
+            this.images.add(new ImageResponse(image));
         }
-
+        this.complaintViolationTypes = new ArrayList<>();
+        for (ViolationType violationType : complaint.getViolationTypes()) {
+            this.complaintViolationTypes.add(new ViolationTypeResponse(violationType));
+        }
     }
 
     public CitizenResponse getAuthor() {
@@ -53,13 +56,13 @@ public class ComplaintResponse {
         this.author = author;
     }
 
-//    public Collection<ComplaintViolationType> getComplaintViolationTypes() {
-//        return complaintViolationTypes;
-//    }
-//
-//    public void setComplaintViolationTypes(Collection<ComplaintViolationType> complaintViolationTypes) {
-//        this.complaintViolationTypes = complaintViolationTypes;
-//    }
+    public Collection<ViolationTypeResponse> getComplaintViolationTypes() {
+        return complaintViolationTypes;
+    }
+
+    public void setComplaintViolationTypes(Collection<ViolationTypeResponse> complaintViolationTypes) {
+        this.complaintViolationTypes = complaintViolationTypes;
+    }
 
     public Date getDate() {
         return date;
