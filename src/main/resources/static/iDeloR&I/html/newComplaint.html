@@ -1,126 +1,133 @@
 <script>
-	function imagesSelected(myFiles) {
-		for (var i = 0, f; f = myFiles[i]; i++) {
-			var imageReader = new FileReader();
-			imageReader.onload = (function(aFile) {
-				return function(e) {
-					var span = document.createElement('span');
-					span.innerHTML = [ '<img class="images" src="', e.target.result,'" title="', aFile.name, '"/>' ]
-							.join('');
-					document.getElementById('thumbs').insertBefore(span, null);
-				};
-			})(f);
-			imageReader.readAsDataURL(f);
-		}
-	}
+    function imagesSelected(myFiles) {
+        for (var i = 0, f; f = myFiles[i]; i++) {
+            var imageReader = new FileReader();
+            imageReader.onload = (function (aFile) {
+                return function (e) {
+                    var span = document.createElement('span');
+                    span.innerHTML = [ '<img class="images" src="', e.target.result, '" title="', aFile.name, '"/>' ]
+                            .join('');
+                    document.getElementById('thumbs').insertBefore(span, null);
+                };
+            })(f);
+            imageReader.readAsDataURL(f);
+        }
+    }
 
-	function dropIt(e) {
-		imagesSelected(e.dataTransfer.files);
-		e.stopPropagation();
-		e.preventDefault();
-	}
+    function dropIt(e) {
+        imagesSelected(e.dataTransfer.files);
+        e.stopPropagation();
+        e.preventDefault();
+    }
 
-// 	$('input[type=file]').bootstrapFileInput();
-// 	$('.file-inputs').bootstrapFileInput();
+    // 	$('input[type=file]').bootstrapFileInput();
+    // 	$('.file-inputs').bootstrapFileInput();
 </script>
 
 <div class="jumbotron">
 
     <style>
         .images {
-            height:75px;
-            width:75px;
-            border:0px;
-            margin:15px 15px 0 0;
+            height: 75px;
+            width: 75px;
+            border: 0px;
+            margin: 15px 15px 0 0;
         }
 
         .help-inline {
-            color : #ED5156;
+            color: #ED5156;
         }
-         .complaint-form {
-             max-width: 45%;
-         }
-         label {
-             padding: 3px;
-         }
 
-        .drop-area  {
+        .complaint-form {
+            max-width: 45%;
+        }
+
+        label {
+            padding: 3px;
+        }
+
+        .drop-area {
             background-color: white;
         }
 
     </style>
-	<form role="form" method="post" class="complaint-form" action="localhost:8999/saveComplaint" onsubmit="return(validateComplaintForm())" >
-		<h2 style="padding-bottom: 5%" class="form-signin-heading">Provide
-			the information about violation</h2>
-		<input name="episodename" class="form-control" type="text" placeholder="Episode name"
-			required autofocus> <input class="form-control"
-			id="datetimepicker" placeholder="Date & Time" required type="text">
+    <form role="form" class="complaint-form" ng-submit="submit()" ng-controller="FormController"
+          onsubmit="return(validateComplaintForm())">
+        <h2 style="padding-bottom: 5%" class="form-signin-heading">Provide
+            the information about violation</h2>
+        <input name="episodename" ng-model="episodeName" class="form-control" type="text" placeholder="Episode name"
+               required autofocus> <input class="form-control"
+                                          id="datetimepicker" ng-model="datetime" placeholder="Date & Time" required
+                                          type="text">
 
-		<div id="violationTags"></div>
-		<textarea class="form-control" required
-			placeholder="Violation details" rows="10" cols="40"
-			style="resize: none"></textarea>
-		<br> <label style="padding: 3px;">Mark violation
-			location:</label>
+        <div id="violationTags"></div>
+        <textarea class="form-control" required
+                  placeholder="Violation details" rows="10" cols="40"
+                  style="resize: none" ng-model="description"></textarea>
+        <br> <label style="padding: 3px;">Mark violation
+        location:</label>
 
-		<div id="map_canvas"></div>
-		<input type="hidden" required id="latFld"> <input
-			type="hidden" required id="lngFld"> <br>
+        <div id="map_canvas"></div>
+        <input type="hidden" required id="latFld" ng-model="latitude"> <input
+            type="hidden" required id="lngFld" ng-model="longitude"> <br>
 
-		<div class="form-group" id="imageUploader">
-			<label>Add violation images:</label>
-			<table width="100%" border="1" cellspacing=0 cellpadding=5>
-				<tr>
-					<td align="left" height="105" class="drop-area"
-						ondragenter="return false" ondragover="return false"
-						ondrop="dropIt(event)"><output id="thumbs"></output></td>
-				</tr>
-				<tr>
-					<td>
-						<p style="font-size: inherit">
-							Drag & drop or choose images from your local file system: <input
-								type="file" id="input" size="10" multiple="true"
-								onchange="imagesSelected(this.files)" />
-						</p>
-					</td>
-				</tr>
-			</table>
-		</div>
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-		<hr>
-	</form>
-	<script>
-		$(function() {
-			$("#violationTags").tags(
-					{
-						restrictTo : [ "Non-patriotic behavior",
-								"Ultra-violence", "Urinating in public" ],
-						suggestions : [ "Non-patriotic behavior",
-								"Ultra-violence", "Urinating in public" ],
-						promptText : "   Violation tags",
-						suggestOnClick : true
-					});
+        <div class="form-group" id="imageUploader">
+            <label>Add violation images:</label>
+            <table width="100%" border="1" cellspacing=0 cellpadding=5>
+                <tr>
+                    <td align="left" height="105" class="drop-area"
+                        ondragenter="return false" ondragover="return false"
+                        ondrop="dropIt(event)">
+                        <output id="thumbs"></output>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style="font-size: inherit">
+                            Drag & drop or choose images from your local file system: <input
+                                type="file" id="input" size="10" multiple="true"
+                                onchange="imagesSelected(this.files)"/>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+        <hr>
+    </form>
+    <script>
 
-			loadScript();
-		});
+        var yolo = [ "Non-patriotic behavior",
+            "Ultra-violence", "Urinating in public" ];
+        $(function () {
+            $("#violationTags").tags(
+                    {
+                        restrictTo: yolo,
+                        suggestions: yolo,
+                        promptText: "   Violation tags",
+                        suggestOnClick: true
+                    });
+
+            loadScript();
+        });
 
         $('html, body').animate({ scrollTop: 0 }, 0);
         function validateComplaintForm() {
             $('.help-inline').remove();
 
-            if($('.tag').length == 0){
+            if ($('.tag').length == 0) {
                 $('#violationTags').after('<span class="help-inline">You should provide at least one tag!</span>');
                 window.setTimeout(scrollToElement('#violationTags'), 300);
                 return false;
             }
-            if(!($('#latFld').val() && $('#lngFld').val())) {
+            if (!($('#latFld').val() && $('#lngFld').val())) {
                 $('#map_canvas').after('<span class="help-inline">Please mark the location!</span>');
                 window.setTimeout(scrollToElement('#map_canvas'), 300);
                 return false;
             }
 
             // optional?
-            if($('.images').length == 0) {
+            if ($('.images').length == 0) {
                 $('#imageUploader').after('<span class="help-inline">You should upload at least one image!</span>');
                 window.setTimeout(scrollToElement('#imageUploader'), 300);
                 return false;
@@ -128,14 +135,14 @@
             return true;
         }
 
-		function loadScript() {
-			var script = document.createElement('script');
-			script.type = 'text/javascript';
+        function loadScript() {
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
 
-			script.src = 'https://maps.googleapis.com/maps/api/js?v=AIzaSyCzYjvCXkNylxgzNlWHmuWwSmJmWeqm61k&sensor=false&'
-					+ 'callback=initMap';
-			document.body.appendChild(script);
-		}
+            script.src = 'https://maps.googleapis.com/maps/api/js?v=AIzaSyCzYjvCXkNylxgzNlWHmuWwSmJmWeqm61k&sensor=false&'
+                    + 'callback=initMap';
+            document.body.appendChild(script);
+        }
 
         $('#datetimepicker').datetimepicker();
 
@@ -143,7 +150,55 @@
             $('html, body').animate({
                 scrollTop: $(id).offset().top - 100
             }, 700);
-        };
+        }
+        ;
+
+        function getUserViolationTags() {
+            var violationTagList = [];
+            $('.tag.label.btn-info.md').each(function () {
+                violationTagList.push($(this).find('span').text());
+            });
+            return violationTagList;
+        }
+
+        function getViolationImages() {
+            var imageList = [];
+
+            $('#imageUploader').find('#thumbs').find('span').each(function () {
+                var domImage = $(this).find('img');
+                imageList.push(new UserImg(domImage.prop('src'), domImage.prop('title')))
+            });
+            return imageList;
+        }
+
+
+        function UserImg(data, title) {
+            this.data = data;
+            this.title = title;
+        }
+
+
+        function FormController($scope) {
+
+            $scope.submit = function () {
+                var complaintData = new ComplaintData($scope.episodeName, $scope.datetime,
+                        getUserViolationTags(), $scope.description,  $scope.latitude, $scope.longitude, getViolationImages());
+
+                //TODO: post this shiet to server
+                console.log(JSON.stringify(complaintData));
+            }
+        }
+
+        function ComplaintData(episodeName, date, tags, description, latitude, longitude, images) {
+            this.episodeName = episodeName;
+            this.date = date;
+            this.tags = tags;
+            this.description = description;
+            this.latitude = latitude;
+            this.longitude = longitude;
+            this.images = images;
+        }
+
 
     </script>
 </div>
