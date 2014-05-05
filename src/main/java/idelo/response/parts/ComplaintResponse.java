@@ -38,11 +38,11 @@ public class ComplaintResponse {
 
         this.locationLatitude = complaint.getLocationLatitude();
         this.locationLongitude = complaint.getLocationLongitude();
-        this.images = new ArrayList<>();
+        this.images = new ArrayList();
         for (Image image : complaint.getImages()) {
             this.images.add(new ImageResponse(image));
         }
-        this.complaintViolationTypes = new ArrayList<>();
+        this.complaintViolationTypes = new ArrayList();
         for (ViolationType violationType : complaint.getViolationTypes()) {
             this.complaintViolationTypes.add(new ViolationTypeResponse(violationType));
         }

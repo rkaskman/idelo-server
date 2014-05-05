@@ -26,14 +26,14 @@ public class AppController {
     @RequestMapping(value="/generate", method = RequestMethod.GET)
     @ResponseBody
     public void generate() {
-        Citizen ilja = new Citizen("Ilja", Sex.MALE, new Date(100,1,2),"Tartu, Kesklinn" ,12322L ,"@ilj");
-        Citizen roman =  new Citizen("Roman", Sex.MALE, new Date(101,1,2),"Tallinn, Musta" ,52322123L ,"@rom");
-        Citizen pavel =  new Citizen("Pavel", Sex.MALE, new Date(123,1,2),"Tallinn, Lasna" ,312322L ,"@pvl");
+        Citizen ilja = new Citizen("Ilja", Sex.MALE, new Date(100,1,2),"Tartu, Kesklinn" ,12322L ,"ilja@idelo.com", "pass");
+        Citizen roman =  new Citizen("Roman", Sex.MALE, new Date(101,1,2),"Tallinn, Musta" ,52322123L ,"roma@idelo.com", "pass123");
+        Citizen pavel =  new Citizen("Pavel", Sex.MALE, new Date(123,1,2),"Tallinn, Lasna" ,312322L ,"pavel@gmail.com", "123pass");
 
-//        citizenRepository.save(ilja);
-//        citizenRepository.save(roman);
-//        citizenRepository.save(pavel);
-//
+        citizenRepository.save(ilja);
+        citizenRepository.save(roman);
+        citizenRepository.save(pavel);
+
 //        Complaint complaint = new Complaint(
 //                new Date(123,1,2), StatusOfComplaint.NEW, "Roman was speaking to loudly!",
 //                ilja, roman);

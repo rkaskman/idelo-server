@@ -13,4 +13,6 @@ public interface CitizenRepository extends CrudRepository<Citizen, Long> {
 
     List<Citizen> findAll();
 
+    List<Citizen> findByNick(String nick);
+
 }

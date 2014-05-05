@@ -20,7 +20,7 @@ iDeloControllers.controller('MyComplaintsCtrl', [
 		'$routeParams',
 		'$http','Auth',
 		function($scope, $routeParams, $http, Auth) {
-			$http.get('/get-complaint/' + Auth.getUser()).success(
+			$http.get('/get-complaint/' + Auth.getUserId()).success(
 					function(data) {
 						$scope.complaints = data;
 					});

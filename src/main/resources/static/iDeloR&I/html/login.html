@@ -23,19 +23,52 @@
 <!-- JS  -->
    <script>
        $(document).ready(function(){
-           function createCookie() {
+           function createCookie(username, id) {
                var today = new Date();
                var daysToLive = 5;
                today.setTime(today.getTime()+(daysToLive*24*60*60*1000));
                var expires = "expires="+today.toGMTString();
-               document.cookie = "username=JohnDoe123@gmail.com; "+expires;
-               document.cookie = "id=123; "+expires;
+               document.cookie = "username="+username+"; "+expires;
+               document.cookie = "id="+id+"; "+expires;
            }
 
-           $("form#signin").submit(function () {
-               createCookie();
-               alert("The cookie is created!" + document.cookie);
+           $("form#signin").submit(function (e) {
+
+               var username = $("input#username").val();
+               var password = $("input#password").val();
+               var continueSubmission = false;
+
+
+               $.ajax({
+                   type: "POST",
+                   async: false,
+                   url: "/login",
+                   data: {"nick": username, "password": password},
+                   success: function (data) {
+                       if (data == 0) {
+                           $("#warn").fadeIn(function () {
+                                       setTimeout(function () {
+                                           $("#warn").fadeOut();
+                                       }, 1500);
+                                   }
+                           );
+                           continueSubmission = false;
+                       } else {
+                           createCookie(username, data);
+                           console.error("The cookie is created!" + document.cookie);
+                           continueSubmission = true;
+                       }
+
+                   },
+                   error: function(){
+                       alert("error!");
+                       continueSubmission = false;
+                   }
+               });
+
+               return continueSubmission;
            });
+
        });
    </script>
 </head>
@@ -58,11 +91,16 @@
 						</ul>
 					</div>
 				</div>
+
+                <div style="display: none"  id="warn" class="alert alert-warning">
+                    Wrong Username Or Password!</div>
+
 				<form id="signin" method="get" action="index.html" class="form-signin"
 					role="form">
 					<h2 class="form-signin-heading">Please sign in</h2>
-					<input type="email" class="form-control"
-						placeholder="Email address" required autofocus> <input
+					<input id="username" type="email" class="form-control"
+						placeholder="Email address" required autofocus>
+                    <input id="password"
 						type="password" class="form-control" placeholder="Password"
 						required> <label class="checkbox"> <input
 						type="checkbox" value="remember-me"> Remember me
