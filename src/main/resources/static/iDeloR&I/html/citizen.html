@@ -17,7 +17,7 @@ dl>dd {
 
 <div class="row">
 	<div class="col-md-3">
-		<img ng-src="../img/citizen/{{citizen.img}} " height="400px" width="300px"
+		<img src="../img/citizen/default.jpg" height="400px" width="300px"
 			alt="..." class="img-thumbnail">
 	</div>
 	<div class="col-md-9">
@@ -35,7 +35,7 @@ dl>dd {
 		</dl>
 		<p>
 			<a href="#/complaints/{{citizen.id}}" class="btn btn-primary btn-lg">View His
-				Complaints (3)</a> &nbsp;
+				Complaints ({{citizen.numOfComplaints}})</a> &nbsp;
 			<button type="button" disabled class="btn btn-default btn-lg">View
 				Complaints On Him</button>
 		</p>
