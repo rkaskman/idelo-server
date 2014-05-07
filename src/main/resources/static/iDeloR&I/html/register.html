@@ -19,6 +19,85 @@
     <link href="../css/unregistered/common.css" rel="stylesheet">
 
     <!-- JS -->
+    <script>
+            $(function() {
+                    $('#password1').keyup(function(){
+                        performAllPasswordValidations();
+                    });
+
+                    $('#password2').keyup(function(){
+                        performAllPasswordValidations();
+                    });
+
+                    $('#name').keyup(function(){
+                        validateName();
+                    });
+
+                    $('form').submit(function(){
+                        if(validateRegistrationForm()){
+                            $('button').addClass('disabled');
+                            $.post( '/register', $('form').serialize(), function(data) {
+                                $('#congrats').show();
+                            });
+                        }
+                        return false;
+                    });
+            });
+
+            function validateBirthDate(){
+                var birthDateReg = /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/;
+                if(!birthDateReg.test($('#dateOfBirth').val())) {
+                    $('#birth-warning').text("Birth date should be in yyyy-MM-dd format!");
+                    $('#birth-warning').show();
+                    return false;
+                }
+                $('#birth-warning').hide();
+                return true;
+            }
+
+            function validateName() {
+                var nameReg = /^[a-z ,.'-]+$/i;
+                if (!nameReg.test($('#name').val())) {
+                    $('#name-warning').text("There are numeric characters in name!");
+                    $('#name-warning').show();
+                    return false;
+                }
+                $('#name-warning').hide();
+                return true;
+            }
+
+            function performAllPasswordValidations() {
+                if (performPasswordLengthValidation() &&  performPasswordEqualityValidation()) {
+                    return true;
+                }
+                return false;
+
+                function performPasswordEqualityValidation(){
+                    if ( $('#password1').val() != $('#password2').val() ) {
+                        $('#password-warning').text("Password and password confirmation do not match!");
+                        $('#password-warning').show();
+                        return false;
+                    }
+                    $('#password-warning').hide();
+                    return true;
+                }
+
+                function performPasswordLengthValidation(){
+                    if ($('#password1').val().length < 8) {
+                        $('#password-warning').text("The passwords must be at least 8 symbols long!");
+                        $('#password-warning').show();
+                        return false;
+                    }
+                    $('#password-warning').hide();
+                    return true;
+                }
+            }
+
+
+            function validateRegistrationForm() {
+                return performAllPasswordValidations() && validateName() && validateBirthDate()
+            }
+    </script>
 </head>
 
 <body>
@@ -38,19 +117,23 @@
                     </ul>
                 </div>
             </div>
+            <br>
+            <br>
 
             <div class="inner cover">
                 <h1 class="cover-heading">Fill Out Fields To Register</h1>
-
+                <div style="display: none" id="congrats" class="alert alert-success">
+                    Congratulations! You have been registered! <a href="login.html"><b>Continue with login.</b></a>
+                </div>
                 <div class="row">
                     <div class="col-md-12 col-md-offset-1">
-                        <form class="form-horizontal" action="index.html" method="get"
-                              role="form" onsubmit="return(validateRegistrationForm())">
+                        <form class="form-horizontal" action="index.html" method="POST"
+                              role="form">
                             <div class="form-group">
                                 <label for="inputEmail3" class="col-sm-2 control-label">E-Mail *</label>
 
                                 <div class="col-sm-6">
-                                    <input type="email" class="form-control"
+                                    <input name="email" type="email" class="form-control"
                                            placeholder="Email address" required autofocus>
                                 </div>
                             </div>
@@ -58,7 +141,7 @@
                                 <label for="inputEmail3" class="col-sm-2 control-label">Password *</label>
 
                                 <div class="col-sm-6">
-                                    <input type="password" id="password1" class="form-control"
+                                    <input name="password" type="password" id="password1" class="form-control"
                                            placeholder="Password" required>
                                 </div>
                             </div>
@@ -70,14 +153,16 @@
                                     <input type="password"
                                            id="password2" class="form-control"
                                            placeholder="Password Confirmation" required>
+                                    <span id="password-warning" style="display: none" class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputEmail3" class="col-sm-2 control-label">Name *</label>
 
                                 <div class="col-sm-6">
-                                    <input class="form-control" id="name"
+                                    <input name="name" class="form-control" id="name"
                                            placeholder="Name" required>
+                                    <span id="name-warning" style="display: none" class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -85,15 +170,15 @@
 
                                 <div class="col-sm-6">
                                     <div class="radio">
-                                        <input type="radio" name="optionsRadios" id="optionsRadios1"
-                                               value="option1" checked>
+                                        <input type="radio" name="sex" id="optionsRadios1"
+                                               value="Male" checked>
                                         <label style="float: left">
                                             Male
                                         </label>
                                     </div>
                                     <div class="radio">
-                                            <input type="radio" name="optionsRadios"
-                                                       id="optionsRadios2" value="option2">
+                                            <input type="radio" name="sex"
+                                                       id="optionsRadios2" value="Female">
                                         <label style="float: left">
                                             Female
                                         </label>
@@ -105,15 +190,16 @@
                                     Of Birth *</label>
 
                                 <div class="col-sm-6">
-                                    <input class="form-control" id="dateOfBirth"
-                                           placeholder="Date Of Birth" required>
+                                    <input name="date" class="form-control" id="dateOfBirth"
+                                           placeholder="Date in format yyyy-MM-dd" required>
+                                    <span id="birth-warning" style="display: none" class="help-inline"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputEmail3" class="col-sm-2 control-label">Address *</label>
 
                                 <div class="col-sm-6">
-                                    <input class="form-control" id="inputEmail3"
+                                    <input name="address" class="form-control" id="inputEmail3"
                                            placeholder="Address" required>
                                 </div>
                             </div>
@@ -137,32 +223,6 @@
         </div>
 
     </div>
-    <script>
-        function validateRegistrationForm() {
-            var nameReg = /^[a-z ,.'-]+$/i;
-            var birthDateReg = /^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/;
-
-            $('.help-inline').remove();
-
-            if (!nameReg.test($('#name').val())) {
-                $('#name').after('<span class="help-inline">Non-alphabetic symbols are present!</span>');
-                return false;
-            }
-            if ($('#password1').val() != $('#password2').val()) {
-                $('#password2').after('<span class="help-inline">The passwords don\'t match!</span>');
-                return false;
-            }
-            if ($('#password1').val().length < 8) {
-                $('#password1').after('<span class="help-inline">The passwords must be at least 8 symbols long!</span>');
-                return false;
-            }
-            if(!birthDateReg.test($('#dateOfBirth').val())) {
-                $('#dateOfBirth').after('<span class="help-inline">Birth date should be in yyyy-MM-dd format!</span>');
-                return false;
-            }
-            return true;
-        }
-    </script>
 </div>
 </body>
 </html>
