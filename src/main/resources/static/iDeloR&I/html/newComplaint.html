@@ -110,10 +110,9 @@
                    });
                 },
                 error: function(){
-                    alert("error!");
+                    alert("error!");   //handle?
                 }
             });
-
 
             $("#violationTags").tags(
                     {
@@ -141,7 +140,6 @@
                 return false;
             }
 
-            // optional?
             if ($('.images').length == 0) {
                 $('#imageUploader').after('<span class="help-inline">You should upload at least one image!</span>');
                 window.setTimeout(scrollToElement('#imageUploader'), 300);
@@ -186,7 +184,6 @@
             return imageList;
         }
 
-
         function UserImg(data, title) {
             this.data = data;
             this.title = title;
@@ -206,9 +203,8 @@
                         url: '/newComplaint',
                         data: JSON.stringify(complaintData)
                     }).success(function (data) {
-                        console.log(data);
+                        console.log(data);  //todo proper redirect
                     });
-
                 }
             }
         }
