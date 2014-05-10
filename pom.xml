@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.springframework</groupId>
@@ -22,12 +22,17 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
+        <dependency><!-- jackson -->
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
         <dependency>
             <artifactId>hibernate-entitymanager</artifactId>
             <groupId>org.hibernate</groupId>
             <scope>compile</scope>
             <version>3.5.3-Final</version>
-         </dependency>
+        </dependency>
         <dependency>
             <artifactId>hibernate-core</artifactId>
             <groupId>org.hibernate</groupId>
@@ -77,14 +82,18 @@
         <repository>
             <id>spring-snapshots</id>
             <url>http://repo.spring.io/libs-snapshot</url>
-            <snapshots><enabled>true</enabled></snapshots>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
             <id>spring-snapshots</id>
             <url>http://repo.spring.io/libs-snapshot</url>
-            <snapshots><enabled>true</enabled></snapshots>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </pluginRepository>
     </pluginRepositories>
 </project>
