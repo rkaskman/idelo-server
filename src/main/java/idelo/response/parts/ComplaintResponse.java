@@ -14,6 +14,17 @@ public class ComplaintResponse {
 
     @JsonProperty(value = "person")
     private CitizenResponse author;
+    @JsonProperty
+    private String episodeName;
+
+    public String getEpisodeName() {
+        return episodeName;
+    }
+
+    public void setEpisodeName(String episodeName) {
+        this.episodeName = episodeName;
+    }
+
     @JsonProperty(value = "violationTypes")
     private Collection<ViolationTypeResponse> complaintViolationTypes;
     @JsonProperty(value = "date")
@@ -38,6 +49,7 @@ public class ComplaintResponse {
 
         this.locationLatitude = complaint.getLocationLatitude();
         this.locationLongitude = complaint.getLocationLongitude();
+        this.episodeName = complaint.getEpisodeName();
         this.images = new ArrayList();
         for (Image image : complaint.getImages()) {
             this.images.add(new ImageResponse(image));

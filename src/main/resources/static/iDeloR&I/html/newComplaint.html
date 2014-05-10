@@ -57,7 +57,7 @@
             the information about violation</h2>
         <input name="episodename" ng-model="episodeName" class="form-control" type="text" placeholder="Episode name"
                required autofocus> <input class="form-control"
-                                          id="datetimepicker" ng-model="datetime" placeholder="Date & Time" required
+                                          id="datetimepicker" ng-model="dateTime" placeholder="Date & Time" required
                                           type="text">
 
         <div id="violationTags"></div>
@@ -68,8 +68,8 @@
         location:</label>
 
         <div id="map_canvas"></div>
-        <input type="hidden" required id="latFld" ng-model="latitude"> <input
-            type="hidden" required id="lngFld" ng-model="longitude"> <br>
+        <input type="hidden" required id="latFld" ng-model="locationLatitude"> <input
+            type="hidden" required id="lngFld" ng-model="locationLongitude"> <br>
 
         <div class="form-group" id="imageUploader">
             <label>Add violation images:</label>
@@ -97,13 +97,28 @@
     </form>
     <script>
 
-        var yolo = [ "Non-patriotic behavior",
-            "Ultra-violence", "Urinating in public" ];
+        var tagNames = [];
+
         $(function () {
+            $.ajax({
+                type: "GET",
+                async: false,
+                url: "/getAllViolationTypes",
+                success: function (data) {
+                   data.forEach(function(tag){
+                     tagNames.push(tag.name);
+                   });
+                },
+                error: function(){
+                    alert("error!");
+                }
+            });
+
+
             $("#violationTags").tags(
                     {
-                        restrictTo: yolo,
-                        suggestions: yolo,
+                        restrictTo: tagNames,
+                        suggestions: tagNames,
                         promptText: "   Violation tags",
                         suggestOnClick: true
                     });
@@ -156,7 +171,7 @@
         function getUserViolationTags() {
             var violationTagList = [];
             $('.tag.label.btn-info.md').each(function () {
-                violationTagList.push($(this).find('span').text());
+                violationTagList.push({"name" : $(this).find('span').text()});
             });
             return violationTagList;
         }
@@ -178,27 +193,34 @@
         }
 
 
-        function FormController($scope) {
+        function FormController($scope, $http) {
 
             $scope.submit = function () {
-                var complaintData = new ComplaintData($scope.episodeName, $scope.datetime,
-                        getUserViolationTags(), $scope.description,  $scope.latitude, $scope.longitude, getViolationImages());
 
-                //TODO: post this shiet to server
-                console.log(JSON.stringify(complaintData));
+                if (validateComplaintForm()) {
+                    var complaintData = new ComplaintData($scope.episodeName, new Date($('#datetimepicker').val()),
+                            getUserViolationTags(), $scope.description, $('#latFld').val(), $('#lngFld').val(), getViolationImages());
+                    console.log(complaintData);
+                    $http({
+                        method: 'POST',
+                        url: '/newComplaint',
+                        data: JSON.stringify(complaintData)
+                    }).success(function (data) {
+                        console.log(data);
+                    });
+
+                }
             }
         }
 
-        function ComplaintData(episodeName, date, tags, description, latitude, longitude, images) {
+        function ComplaintData(episodeName, date, tags, description, locationLatitude, locationLongitude, images) {
             this.episodeName = episodeName;
             this.date = date;
-            this.tags = tags;
+            this.violationTypes = tags;
             this.description = description;
-            this.latitude = latitude;
-            this.longitude = longitude;
+            this.locationLatitude = locationLatitude;
+            this.locationLongitude = locationLongitude;
             this.images = images;
         }
-
-
     </script>
 </div>

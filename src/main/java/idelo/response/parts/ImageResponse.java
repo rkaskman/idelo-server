@@ -8,17 +8,16 @@ public class ImageResponse {
     @JsonProperty
     private Integer id;
     @JsonProperty
-    private byte[] imageBytes;
+    String data;
     @JsonProperty
-    private String name;
-    @JsonProperty
-    private String format;
+    private String title;
+
 
     public ImageResponse(Image image) {
         this.id = image.getId();
-        this.imageBytes = image.getImageBytes();
-        this.name = image.getName();
-        this.format = image.getFormat();
+        this.data = image.getData();
+        this.title = image.getTitle();
+
     }
 
     public Integer getId() {
@@ -29,27 +28,19 @@ public class ImageResponse {
         this.id = id;
     }
 
-    public byte[] getImageBytes() {
-        return imageBytes;
+    public String getData() {
+        return data;
     }
 
-    public void setImageBytes(byte[] imageBytes) {
-        this.imageBytes = imageBytes;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getFormat() {
-        return format;
-    }
-
-    public void setFormat(String format) {
-        this.format = format;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

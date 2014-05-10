@@ -4,7 +4,6 @@ import idelo.model.complaint.Complaint;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

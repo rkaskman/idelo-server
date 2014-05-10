@@ -1,14 +1,13 @@
 package idelo.model.complaint;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "violation_type")
 public class ViolationType {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer id;
     private String name;
 

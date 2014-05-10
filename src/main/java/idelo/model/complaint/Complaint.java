@@ -9,29 +9,31 @@ import java.util.Collection;
 import java.util.Date;
 
 @Entity
-public class Complaint implements Serializable{
+public class Complaint implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
-    private Date date;
+    private String episodeName;
 
-    private StatusOfComplaint statusOfComplaint;
+    private Date date;
 
     private String description;
 
     private Double locationLatitude;
 
     private Double locationLongitude;
-    @OneToMany(mappedBy = "complaint")
+
+    private StatusOfComplaint statusOfComplaint;
+    @OneToMany(mappedBy = "complaint", cascade = CascadeType.ALL)
     private Collection<Image> images;
 
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name="complaint_violation_type",
-            joinColumns={@JoinColumn(name="complaint", referencedColumnName="id")},
-            inverseJoinColumns={@JoinColumn(name="violation_type", referencedColumnName="id")})
+            name = "complaint_violation_type",
+            joinColumns = {@JoinColumn(name = "complaint", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "violation_type", referencedColumnName = "id")})
     private Collection<ViolationType> violationTypes;
 
     @ManyToOne
@@ -127,6 +129,14 @@ public class Complaint implements Serializable{
         this.violationTypes = violationTypes;
     }
 
+    public String getEpisodeName() {
+        return episodeName;
+    }
+
+    public void setEpisodeName(String episodeName) {
+        this.episodeName = episodeName;
+    }
+
     @Override
     public String toString() {
         return "Complaint{" +
@@ -138,20 +148,5 @@ public class Complaint implements Serializable{
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        Complaint complaint = (Complaint) o;
-
-        if (id != null ? !id.equals(complaint.id) : complaint.id != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
-    }
 }
