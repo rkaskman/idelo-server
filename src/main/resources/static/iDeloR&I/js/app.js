@@ -3,7 +3,7 @@
 /* App Module */
 
 var iDeloApp = angular.module('iDeloApp',
-    [ 'ngRoute', 'iDeloControllers', 'iDeloServices']);
+    [ 'ngRoute', 'iDeloControllers', 'iDeloServices', 'directive.loading']);
 
 iDeloApp.config([ '$routeProvider', function ($routeProvider) {
     $routeProvider.when('/', {
