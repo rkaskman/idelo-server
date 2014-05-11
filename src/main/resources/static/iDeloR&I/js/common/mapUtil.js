@@ -39,7 +39,6 @@ function deleteOverlays(marker) {
 
 function initDisplayMap(lat, lng) {
     var map;
-    //Tallinn for now
     var startLocation = new google.maps.LatLng(lat, lng);
     var mapOptions = {
         zoom: 10,

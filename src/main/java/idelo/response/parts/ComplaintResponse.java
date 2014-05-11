@@ -6,19 +6,37 @@ import idelo.model.complaint.Image;
 import idelo.model.complaint.StatusOfComplaint;
 import idelo.model.complaint.ViolationType;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 public class ComplaintResponse {
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+    @JsonProperty(value = "id")
+    private Long id;
     @JsonProperty(value = "person")
     private CitizenResponse author;
     @JsonProperty
     private String episodeName;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     @JsonProperty(value = "violationTypes")
+
     private Collection<ViolationTypeResponse> complaintViolationTypes;
     @JsonProperty(value = "date")
     private String date;
@@ -35,6 +53,7 @@ public class ComplaintResponse {
 
 
     public ComplaintResponse(Complaint complaint) {
+        this.id = complaint.getId();
         this.author = new CitizenResponse(complaint.getAuthor());
         this.date =  DATE_FORMAT.format(complaint.getDate());
         this.statusOfComplaint = complaint.getStatusOfComplaint();

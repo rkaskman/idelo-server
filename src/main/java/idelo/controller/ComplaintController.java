@@ -44,6 +44,12 @@ public class ComplaintController {
         return new CitizenComplaintsResponse(citizen.getId(), citizen.getName(), citizen.getComplaints());
     }
 
+    @RequestMapping(value = "/getComplaintByComplaintId/{complaintId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Complaint getComplaintByComplaintId(@PathVariable Long complaintId) {
+        return complaintRepository.findOne(complaintId);
+    }
+
     @RequestMapping(value = "/newComplaint", method = RequestMethod.POST, consumes = "application/json;")
     @ResponseBody
     public String addNewComplaint(@RequestBody final Complaint complaint) {

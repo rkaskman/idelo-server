@@ -15,6 +15,18 @@ iDeloControllers.controller('ComplaintsCtrl', [
 					});
 		} ]);
 
+iDeloControllers.controller('ComplaintCtrl', [
+    '$scope',
+    '$routeParams',
+    '$http',
+    function($scope, $routeParams, $http) {
+        $http.get('/getComplaintByComplaintId/' + $routeParams.complaintId)
+            .success(function(data) {
+                $scope.complaint = data;
+                console.log(data);
+            });
+    } ]);
+
 iDeloControllers.controller('MyComplaintsCtrl', [
 		'$scope',
 		'$routeParams',

@@ -3,7 +3,7 @@
 /* App Module */
 
 var iDeloApp = angular.module('iDeloApp',
-    [ 'ngRoute', 'iDeloControllers', 'iDeloServices', 'directive.loading']);
+    [ 'ngRoute', 'iDeloControllers', 'iDeloServices', 'directive.loading' ]);
 
 iDeloApp.config([ '$routeProvider', function ($routeProvider) {
     $routeProvider.when('/', {
@@ -11,6 +11,9 @@ iDeloApp.config([ '$routeProvider', function ($routeProvider) {
     }).when('/complaints/:citizenId', {
         templateUrl: 'complaints.html',
         controller: 'ComplaintsCtrl'
+    }).when('/complaint/:complaintId', {
+        templateUrl: 'complaint.html',
+        controller: 'ComplaintCtrl'
     }).when('/allCitizens', {
         templateUrl: 'allCitizens.html',
         controller: 'CitizensCtrl'

@@ -1,5 +1,7 @@
 package idelo.model.citzen;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import idelo.model.complaint.Complaint;
 
 import javax.persistence.*;
@@ -8,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class,
+        property="@id")
 @Entity
 public class Citizen implements Serializable {
 
