@@ -47,7 +47,7 @@ public class ComplaintController {
     @ResponseBody
     public String addNewComplaint(@RequestBody final Complaint complaint) {
 
-        List<ViolationType> violationTypes = new ArrayList<>();
+        List<ViolationType> violationTypes = new ArrayList();
         for (ViolationType violationType : complaint.getViolationTypes()) {
             violationTypes.add(violationTypeRepository.findByName(violationType.getName()).get(0));
         }

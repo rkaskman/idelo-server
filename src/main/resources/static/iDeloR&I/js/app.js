@@ -35,6 +35,8 @@ iDeloApp.config([ '$routeProvider', function ($routeProvider) {
     }).when('/asAdmin', {
         templateUrl: 'indexInfo.html',
         controller: 'LoginCtrl'
+    }).when('/detailed-search', {
+        templateUrl: 'advancedSearch.html'
     }).otherwise({
         redirectTo: '/allComplaints'
     });

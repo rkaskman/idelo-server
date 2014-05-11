@@ -47,15 +47,9 @@ iDeloControllers.controller('CitizenCtrl', [
 
 iDeloControllers.controller('SearchCtrl', [ '$scope', '$routeParams', '$http',
 		function($scope, $routeParams, $http) {
-			if ($routeParams.query.indexOf("sa") != -1) {
-				$http.get('json/search/0.json').success(function(data) {
+				$http.get('/search/'+$routeParams.query).success(function(data) {
 					$scope.result = data;
 				});
-			} else {
-				$http.get('json/search/1.json').success(function(data) {
-					$scope.result = data;
-				});
-			}
 		} ]);
 
 iDeloControllers.controller('LoginCtrl', ['$scope', '$location', 'Auth', function($scope,$location, Auth) {
