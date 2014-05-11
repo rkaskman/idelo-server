@@ -11,20 +11,22 @@
         }
 
         #newCrimeTypeForm {
-         max-width: 45%;
+            max-width: 45%;
         }
 
     </style>
 
-    <form role="form" id="newCrimeTypeForm" class="complaint-form" action="index.html" onsubmit="return(validateTagAdditionForm())">
+    <form role="form" id="newCrimeTypeForm" class="complaint-form" ng-submit="submit()" ng-controller="FormController"
+          onsubmit="return(validateTagAdditionForm())">
         <h2 style="padding-bottom: 5%" class="form-signin-heading">Add new violation tags</h2>
 
         <div id="violationTags"></div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+        <button class="btn btn-lg btn-primary btn-block">Submit</button>
         <hr>
     </form>
     <script>
         $(function () {
+
             $("#violationTags").tags(
                     {
                         tagSize: "lg",
@@ -43,13 +45,68 @@
             return true;
         }
 
-        $('#newCrimeTypeForm').bind("keyup keypress", function(e) {
+        function FormController($scope, $http) {
+
+            $scope.submit = function () {
+
+                if (validateTagAdditionForm()) {
+                    $http({
+                        method: 'POST',
+                        url: '/addNewViolationTypes',
+                        data: getUserViolationTags()
+                    }).success(function () {
+                        console.log("ok"); //todo redirect?
+                    });
+                }
+            }
+        }
+
+        function getUserViolationTags() {
+            var violationTagList = [];
+            $('.tag.label.btn-info.lg').each(function () {
+                violationTagList.push({"name": $(this).find('span').text()});
+            });
+            return violationTagList;
+        }
+
+        $('#newCrimeTypeForm').bind("keyup keypress", function (e) {
             var code = e.keyCode || e.which;
-            if (code  == 13) {
+            if (code == 13) {
                 e.preventDefault();
                 return false;
             }
         });
+
+        function tagAlreadyExists(lastNewTag) {
+            var result;
+            $.ajax({
+                type: "GET",
+                async: false,
+                url: "/checkTagExistence/" + lastNewTag,
+                success: function (data) {
+                    result = data;
+                },
+                error: function () {
+                    alert("error!");   //handle?
+                }
+            });
+            return result;
+        }
+
+        $('#newCrimeTypeForm').bind("keyup", function (e) {
+            var code = e.keyCode || e.which;
+            if (code == 13) {
+                if ($('.tag').length != 0) {
+                    $('.tagWarn').remove();
+                    var lastNewTag = $('.tag').last().find('span').text();
+                    if (tagAlreadyExists(lastNewTag)) {
+                        $('.tag').last().find('a').click();
+                        $('input:text').after('<span class="tagWarn help-inline">Tag "' + lastNewTag + '" already exists!</span>')
+                    }
+                }
+            }
+        });
+
 
     </script>
 </div>

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -63,5 +64,17 @@ public class ComplaintController {
     @ResponseBody
     public List<ViolationType> getViolationTypes() {
         return violationTypeRepository.findAll();
+    }
+
+    @RequestMapping(value = "/checkTagExistence/{name}", method = RequestMethod.GET)
+    @ResponseBody
+    public boolean tagExists(@PathVariable String name) {
+        return !violationTypeRepository.findByName(name).isEmpty();
+    }
+
+    @RequestMapping(value = "/addNewViolationTypes", method = RequestMethod.POST, consumes = "application/json")
+    @ResponseBody
+    public void addNewViolationTypes(@RequestBody Collection<ViolationType> violationTypes) {
+        violationTypeRepository.save(violationTypes);
     }
 }

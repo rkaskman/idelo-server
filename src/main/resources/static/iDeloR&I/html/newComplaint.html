@@ -197,7 +197,7 @@
                 if (validateComplaintForm()) {
                     var complaintData = new ComplaintData($scope.episodeName, new Date($('#datetimepicker').val()),
                             getUserViolationTags(), $scope.description, $('#latFld').val(), $('#lngFld').val(), getViolationImages());
-                    console.log(complaintData);
+                    console.log(JSON.stringify(complaintData));
                     $http({
                         method: 'POST',
                         url: '/newComplaint',
