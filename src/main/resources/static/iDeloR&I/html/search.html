@@ -1,15 +1,10 @@
-<ul class="nav nav-tabs" id="myTab">
-	<li class="active"><a href="#best-match"><h5>Best
-				Matches</h5></a></li>
-    <li><a href="#detailed-search" data-toggle="tab"><h5>Detailed
-        Search</h5></a></li>
-</ul>
-
-<h2>People</h2>
-<div class="cool-text well well-sm" ng-repeat="person in result.persons">
+<h1>Search results : </h1>
+        <hr>
+<h2>People :</h2>
+<div class="cool-text well well" ng-repeat="person in result.persons">
 	<a href="#citizen/{{person.id}}">>> {{person.name}} ({{person.nick}})</a>
 </div>
-<h2>Violations</h2>
-<div ng-repeat="violation in result.viloations" class="cool-text well well-sm">
-	<a href="#complaint/{{violation.id}}">>> {{violation.name}} on {{violation.date}}</a>
+<h2>Violations :</h2>
+<div ng-repeat="violation in result.viloations" class="cool-text well well">
+	<a href="#complaint/{{violation.id}}">>> {{violation.episodeName}} on {{violation.date}}</a>
 </div>

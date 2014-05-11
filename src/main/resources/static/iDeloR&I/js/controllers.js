@@ -56,6 +56,7 @@ iDeloControllers.controller('LoginCtrl', ['$scope', '$location', 'Auth', functio
         $scope.showUserMenu = true;
         $scope.showAdminMenu = false;
         $scope.userName = Auth.getUserName();
+        $scope.userId = Auth.getUserId();
 
 
         $scope.doAdminLogin = function() {

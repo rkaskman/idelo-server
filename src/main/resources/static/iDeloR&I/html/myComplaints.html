@@ -1,3 +1,4 @@
+<h1>All Your Complaints</h1>
 <ol class="breadcrumb">
 	<li class="active">My Complaints</li>
 </ol>
@@ -5,9 +6,8 @@
 	<thead>
 		<tr>
 			<th>#</th>
-			<th>Name</th>
-			<th>ID</th>
-			<th>Type Of Violation<span class="caret"></span></th>
+			<th>Name Of Episode</th>
+			<th>Type Of Violation</th>
 			<th>Date Added</th>
 			<th>Status</th>
 			<th>Action</th>
@@ -16,9 +16,8 @@
 	<tbody>
 		<tr ng-repeat="complaint in complaints.list">
 			<td>{{$index + 1}}</td>
-			<td>{{complaint.person.name}}</td>
-			<td>{{complaint.person.nick}}</td>
-			<td>{{complaint.type}}</td>
+			<td>{{complaint.episodeName}}</td>
+			<td><span ng-repeat="violationType in complaint.violationTypes"> <span class="label label-success">{{violationType.name}} &nbsp;</span> </span></td>
 			<td>{{complaint.date}}</td>
 			<td>{{complaint.status}}</td>
 			<td><a href="#complaint" class="btn btn-default">View

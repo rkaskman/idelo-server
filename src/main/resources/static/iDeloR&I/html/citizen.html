@@ -10,6 +10,7 @@ dl>dd {
 	padding-left: 30px;
 }
 </style>
+<h1>{{citizen.name}} Profile</h1>
 <ol class="breadcrumb">
 	<li><a href="#allCitizens">All Citizens</a></li>
 	<li class="active">{{citizen.name}}</li>
@@ -21,10 +22,10 @@ dl>dd {
 			alt="..." class="img-thumbnail">
 	</div>
 	<div class="col-md-9">
-		<h3>Citizen #{{citizen.number}} ({{citizen.nick}}) profile</h3>
-		<hr>
 		<dl>
-			<dt>Name:</dt>
+			<dt>Username:</dt>
+			<dd>{{citizen.nick}}</dd>
+            <dt>Name:</dt>
 			<dd>{{citizen.name}}</dd>
 			<dt>Sex:</dt>
 			<dd>{{citizen.sex}}</dd>
