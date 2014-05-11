@@ -1,4 +1,4 @@
-
+<h1>View {{complaints.authorName}} complaints</h1>
 <div class="row">
 	<div class="col-sm-12">
 		<ol class="breadcrumb">
@@ -39,26 +39,33 @@
 <br>
 <div class="row">
 	<div class="col-sm-12">
-		<table class="table table-striped ">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>Name</th>
-					<th>ID</th>
-					<th>Type Of Violation<span class="caret"></span></th>
-					<th>Action</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr
-					ng-repeat="complaint in complaints.list | filter:query | filter:type ">
-					<td>{{$index + 1}}</td>
-					<td><a href="#citizen/{{complaint.person.id}}" >{{complaint.person.name}}</a></td>
-					<td>{{complaint.person.nick}}</td>
-					<td>{{complaint.type}}</td>
-					<td><a href="#complaint" class="btn btn-default">View Details</a></td>
-				</tr>
-			</tbody>
-		</table>
+        <table class="table table-striped ">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name Of Complaint</th>
+                <th>Name Of Author</th>
+                <th>Username Of Author</th>
+                <th>Type Of Violation</th>
+                <th>Date Added</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="complaint in complaints.list | filter:query | filter:type">
+                <td>{{$index + 1}}</td>
+                <td>{{complaint.episodeName}}</td>
+                <td>{{complaint.person.name}}</td>
+                <td>{{complaint.person.nick}}</td>
+                <td><span ng-repeat="violationType in complaint.violationTypes"> <span class="label label-success">{{violationType.name}}</span> </span></td>
+                <td>{{complaint.date}}</td>
+                <td>{{complaint.status}}</td>
+                <td><a href="#complaint" class="btn btn-default">View
+                    Details</a></td>
+            </tr>
+            </tbody>
+        </table>
+
 	</div>
 </div>

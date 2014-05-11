@@ -3,7 +3,7 @@
 /* App Module */
 
 var iDeloApp = angular.module('iDeloApp',
-    [ 'ngRoute', 'iDeloControllers', 'iDeloServices']);
+    [ 'ngRoute', 'iDeloControllers', 'iDeloServices', 'directive.loading']);
 
 iDeloApp.config([ '$routeProvider', function ($routeProvider) {
     $routeProvider.when('/', {
@@ -35,6 +35,8 @@ iDeloApp.config([ '$routeProvider', function ($routeProvider) {
     }).when('/asAdmin', {
         templateUrl: 'indexInfo.html',
         controller: 'LoginCtrl'
+    }).when('/detailed-search', {
+        templateUrl: 'advancedSearch.html'
     }).otherwise({
         redirectTo: '/allComplaints'
     });

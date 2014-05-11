@@ -8,10 +8,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import idelo.model.citzen.Citizen;
 import idelo.model.citzen.Sex;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CitizenResponse {
-
+    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
     @JsonProperty
     private Long id;
     @JsonProperty
@@ -19,7 +20,7 @@ public class CitizenResponse {
     @JsonProperty
     private Sex sex;
     @JsonProperty
-    private Date dateOfBirth;
+    private String dateOfBirth;
     @JsonProperty
     private String address;
     @JsonProperty
@@ -36,7 +37,7 @@ public class CitizenResponse {
         this.id = citizen.getId();
         this.name = citizen.getName();
         this.sex = citizen.getSex();
-        this.dateOfBirth = citizen.getDateOfBirth();
+        this.dateOfBirth = DATE_FORMAT.format(citizen.getDateOfBirth());
         this.address = citizen.getAddress();
         this.number = citizen.getNumber();
         this.nick = citizen.getNick();
@@ -66,14 +67,6 @@ public class CitizenResponse {
 
     public void setSex(Sex sex) {
         this.sex = sex;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
     }
 
     public String getAddress() {
