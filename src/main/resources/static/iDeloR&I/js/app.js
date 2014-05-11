@@ -43,7 +43,10 @@ iDeloApp.config([ '$routeProvider', function ($routeProvider) {
     }).otherwise({
         redirectTo: '/allComplaints'
     });
-} ]);
+} ], ['$compileProvider', function($compileProvider) {
+    var oldWhiteList = $compileProvider.imgSrcSanitizationWhitelist();
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s (https|ftp|file|blob):|data:image\//);
+}]);
 
 iDeloApp.run([ '$rootScope', '$location', 'Auth',
     function ($rootScope, $location, Auth) {

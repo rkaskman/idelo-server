@@ -8,11 +8,16 @@ iDeloControllers.controller('ComplaintsCtrl', [
 		'$scope',
 		'$routeParams',
 		'$http',
-		function($scope, $routeParams, $http) {
+		function($scope, $routeParams, $http ) {
 			$http.get('/get-complaint/' + $routeParams.citizenId)
 					.success(function(data) {
 						$scope.complaints = data;
 					});
+            $http.get('/getAllViolationTypes')
+                .success(function(data) {
+                    $scope.allViolationTypes = data;
+                });
+
 		} ]);
 
 iDeloControllers.controller('ComplaintCtrl', [
@@ -25,6 +30,8 @@ iDeloControllers.controller('ComplaintCtrl', [
                 $scope.complaint = data;
                 console.log(data);
             });
+
+
     } ]);
 
 iDeloControllers.controller('MyComplaintsCtrl', [

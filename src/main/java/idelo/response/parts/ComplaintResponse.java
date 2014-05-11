@@ -2,7 +2,6 @@ package idelo.response.parts;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import idelo.model.complaint.Complaint;
-import idelo.model.complaint.Image;
 import idelo.model.complaint.StatusOfComplaint;
 import idelo.model.complaint.ViolationType;
 
@@ -42,8 +41,6 @@ public class ComplaintResponse {
     private String date;
     @JsonProperty(value = "status")
     private StatusOfComplaint statusOfComplaint;
-    @JsonProperty(value = "images")
-    private Collection<ImageResponse> images;
     @JsonProperty(value = "description")
     private String description;
     @JsonProperty(value = "latitude")
@@ -62,10 +59,7 @@ public class ComplaintResponse {
         this.locationLatitude = complaint.getLocationLatitude();
         this.locationLongitude = complaint.getLocationLongitude();
         this.episodeName = complaint.getEpisodeName();
-        this.images = new ArrayList();
-        for (Image image : complaint.getImages()) {
-            this.images.add(new ImageResponse(image));
-        }
+
         this.complaintViolationTypes = new ArrayList();
         for (ViolationType violationType : complaint.getViolationTypes()) {
             this.complaintViolationTypes.add(new ViolationTypeResponse(violationType));
@@ -127,13 +121,5 @@ public class ComplaintResponse {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Collection<ImageResponse> getImages() {
-        return images;
-    }
-
-    public void setImages(Collection<ImageResponse> images) {
-        this.images = images;
     }
 }

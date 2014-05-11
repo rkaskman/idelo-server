@@ -8,14 +8,16 @@
     <script>
         var latitude;
         var longitude;
+
         $(document).ready(function () {
 
-            setTimeout(function() {
+            setTimeout(function () {
                 latitude = $('#lat').text();
                 longitude = $('#lng').text();
                 console.log(latitude);
                 console.log(longitude);
                 loadScript();
+                removeUnsafe();
             }, 2000);
 
 //            $('#mapHolder').append('<map zoom="11" center="[' + latitude + ', ' + longitude + ']"><marker position="[' + latitude + ', ' + longitude + ']" title="Violation spot" animation="Animation.BOUNCE"></marker></map>');
@@ -30,6 +32,14 @@
                     'callback=loadMapWrapper';
             document.body.appendChild(script);
         }
+
+        function removeUnsafe() {
+            $('a').each(function() {
+                $(this).attr('href', $(this).attr('href').replace('unsafe:', ''));
+            })
+
+        }
+
         // workaround to place into callback
         function loadMapWrapper() {
             initDisplayMap(latitude, longitude);
@@ -49,7 +59,7 @@
                     <div id="readOnlyTags" class="bootstrap-tags bootstrap-3">
                         <div class="tags">
                             <div class="tag label btn-info md">
-                                <span ng-repeat="violationType in complaint.violationTypes">&nbsp;&nbsp;{{violationType.name}}&nbsp;&nbsp;</span>
+                                <span ng-repeat="violationType in complaint.violationTypes">&nbsp;&nbsp;{{violationType.name}}&nbsp;&nbsp;</span>&nbsp;&nbsp;
                             </div>
                         </div>
                     </div>
@@ -59,7 +69,7 @@
                 <dd>{{complaint.description}}</dd>
                 <dt>Location:</dt>
                 <dd>
-                    <div id="map_canvas"></div>
+                    <div id="map_canvas" style="width:400px; height: 300px"></div>
                 </dd>
                 <div id="mapHolder">
                     <div id="locHolder" style="display: none">
@@ -68,18 +78,19 @@
                     </div>
                 </div>
 
-                <!--<dt>Images:-->
-                <!--<dd>-->
-                <!--<div class="row">-->
+                <dt>Images:
+                <dd>
+                    <div class="row">
 
 
-                <!--<div class="col-xs-3"><a href="' + complaint.images[i] +'" class="thumbnail"-->
-                <!--target="_blank"><img class="img-responsive"-->
-                <!--src="' +  complaint.images[i] +'"></a></div>-->
+                        <div class="col-xs-3">
+                            <a ng-repeat="image in complaint.images" href="{{image.data}}" class="thumbnail compImages"target="_blank"><img class="img-responsive"
+                                                    src="{{image.data}}" title="{{image.title}}"></a>
+                        </div>
 
-                <!--</div>-->
-                <!--</dd>-->
-                <!--</dt>-->
+                    </div>
+                </dd>
+                </dt>
             </dl>
         </div>
 

@@ -24,11 +24,7 @@
 				<div class="col-sm-3">
 					<select class="ng-pristine ng-valid form-control" ng-model="type">
 						<option selected="true" value="">All</option>
-						<option class="ng-scope ng-binding" value="Anti-Government talks">Anti-Government
-							talks</option>
-						<option class="ng-scope ng-binding" value="Dangerous Philosophing">Dangerous
-							Philosophing</option>
-						<option class="ng-scope ng-binding" value="BlackMailing">BlackMailing</option>
+                        <option ng-repeat="violation in allViolationTypes" value="{{violation.name}}">{{violation.name}}</option>
 					</select>
 				</div>
 			</div>
