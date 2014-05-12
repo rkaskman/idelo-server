@@ -190,12 +190,12 @@
         }
 
 
-        function FormController($scope, $http) {
+        function FormController($scope, $http, Auth) {
 
             $scope.submit = function () {
 
                 if (validateComplaintForm()) {
-                    var complaintData = new ComplaintData($scope.episodeName, new Date($('#datetimepicker').val()),
+                    var complaintData = new ComplaintData(Auth.getUserId(), $scope.episodeName, new Date($('#datetimepicker').val()),
                             getUserViolationTags(), $scope.description, $('#latFld').val(), $('#lngFld').val(), getViolationImages());
                     console.log(JSON.stringify(complaintData));
                     $http({
@@ -209,7 +209,8 @@
             }
         }
 
-        function ComplaintData(episodeName, date, tags, description, locationLatitude, locationLongitude, images) {
+        function ComplaintData(author, episodeName, date, tags, description, locationLatitude, locationLongitude, images) {
+            this.author = {"id" : author};
             this.episodeName = episodeName;
             this.date = date;
             this.violationTypes = tags;
