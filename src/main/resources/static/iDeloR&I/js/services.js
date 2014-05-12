@@ -51,4 +51,13 @@ iDeloApp.factory('Auth', function () {
 });
 
 
+iDeloApp.factory('Search', function () {
+    var Search = {};
+
+    Search.result = {};
+
+    return Search;
+});
+
+
 

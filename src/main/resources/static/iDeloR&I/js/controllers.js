@@ -64,12 +64,63 @@ iDeloControllers.controller('CitizenCtrl', [
 					});
 		} ]);
 
-iDeloControllers.controller('SearchCtrl', [ '$scope', '$routeParams', '$http',
-		function($scope, $routeParams, $http) {
-				$http.get('/search/'+$routeParams.query).success(function(data) {
-					$scope.result = data;
-				});
-		} ]);
+iDeloControllers.controller('SearchCtrl', [ '$scope', '$routeParams', '$http', '$location', 'Search',
+    function($scope, $routeParams, $http, $location, Search) {
+            $scope.result = Search.result;
+            $scope.sexOfUser = "male";
+
+            if($routeParams.query != undefined ){
+                $http.get('/search/'+$routeParams.query).success(function(data) {
+                        $scope.result = data;
+                });
+            }
+
+
+            $scope.doUserSearch = function () {
+                var request = {
+                    nameOfUser: $scope.nameOfUser,
+                    sexOfUser: $scope.sexOfUser,
+                    dateOfUser: $scope.dateOfUser,
+                    addressOfUser: $scope.addressOfUser
+                };
+
+                $http({
+                        url: '/advancedUserSearch/',
+                        method: "POST",
+                        data: $.param(request),
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                        }
+                    }).success(function (data) {
+                        Search.result = data;
+                        $location.path("/search");
+                });
+            };
+
+            $scope.doViolationSearch = function () {
+                var request = {
+                    nameOfEpisode: $scope.nameOfEpisode,
+                    date: $scope.date,
+                    tags: $scope.tags,
+                    location: $scope.location,
+                    description: $scope.description
+                };
+
+                $http({
+                        url: '/advancedComplaintSearch/',
+                        method: "POST",
+                        data: $.param(request),
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                        }
+                    }).success(function (data) {
+                    Search.result = data;
+                    $location.path("/search");
+                });
+            }
+
+        }
+]);
 
 iDeloControllers.controller('LoginCtrl', ['$scope', '$location', 'Auth', function($scope,$location, Auth) {
         $scope.showUserMenu = true;
@@ -84,7 +135,7 @@ iDeloControllers.controller('LoginCtrl', ['$scope', '$location', 'Auth', functio
             $location.path("/");
         };
 
-        $scope.logout = function(username) {
+        $scope.logout = function() {
             Auth.invalidateSession();
         };
 
