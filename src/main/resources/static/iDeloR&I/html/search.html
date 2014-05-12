@@ -1,10 +1,12 @@
 <h1>Search results : </h1>
         <hr>
 <h2>People :</h2>
+<div class="cool-text well well" ng-show="!result.persons.length">No Citizen Found! :(</div>
 <div class="cool-text well well" ng-repeat="person in result.persons">
 	<a href="#citizen/{{person.id}}">>> {{person.name}} ({{person.nick}})</a>
 </div>
 <h2>Violations :</h2>
+<div class="cool-text well well" ng-show="!result.viloations.length">No Violations Found! :(</div>
 <div ng-repeat="violation in result.viloations" class="cool-text well well">
 	<a href="#complaint/{{violation.id}}">>> {{violation.episodeName}} on {{violation.date}}</a>
 </div>
