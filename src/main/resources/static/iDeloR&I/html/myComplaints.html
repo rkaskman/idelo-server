@@ -20,7 +20,7 @@
 			<td><span ng-repeat="violationType in complaint.violationTypes"> <span class="label label-success">{{violationType.name}} &nbsp;</span> </span></td>
 			<td>{{complaint.date}}</td>
 			<td>{{complaint.status}}</td>
-			<td><a href="#complaint" class="btn btn-default">View
+			<td><a href="#/complaint/{{complaint.id}}" class="btn btn-default">View
 					Details</a></td>
 		</tr>
 	</tbody>
