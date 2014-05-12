@@ -29,7 +29,33 @@ iDeloControllers.controller('ComplaintCtrl', [
             .success(function(data) {
                 $scope.complaint = data;
                 console.log(data);
+
+
+                var latitude  = $scope.complaint.locationLatitude;
+                var longitude = $scope.complaint.locationLongitude;
+
+
+                        loadScript();
+
+//            $('#mapHolder').append('<map zoom="11" center="[' + latitude + ', ' + longitude + ']"><marker position="[' + latitude + ', ' + longitude + ']" title="Violation spot" animation="Animation.BOUNCE"></marker></map>');
+
+
+
+                function loadScript() {
+                    var script = document.createElement('script');
+                    script.type = 'text/javascript';
+
+                    script.src = 'https://maps.googleapis.com/maps/api/js?v=AIzaSyCzYjvCXkNylxgzNlWHmuWwSmJmWeqm61k&sensor=false&' +
+                        'callback=loadMapWrapper';
+                    document.body.appendChild(script);
+                }
+
+
+                // workaround to place into callback
+
             });
+
+
 
 
     } ]);

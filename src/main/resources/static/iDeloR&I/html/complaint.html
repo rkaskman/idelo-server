@@ -1,54 +1,21 @@
-<ol class="breadcrumb">
-    <li><a href="#allCitizens">All Citizens</a></li>
-    <li><a href="#citizen/0">Le Sad Frog</a></li>
-    <li><a href="#complaints/0">Complaints</a></li>
-    <li class="active">Complaint #1</li>
-</ol>
+<h1>{{complaint.episodeName}} <small>on {{complaint.date | date:'dd/MM/yyyy HH:mm'}}</small></h1>
+<br>
 <div id="complaint" class="container">
-    <script>
-        var latitude;
-        var longitude;
-
-        $(document).ready(function () {
-
-            setTimeout(function () {
-                latitude = $('#lat').text();
-                longitude = $('#lng').text();
-                console.log(latitude);
-                console.log(longitude);
-                loadScript();
-                removeUnsafe();
-            }, 2000);
-
-//            $('#mapHolder').append('<map zoom="11" center="[' + latitude + ', ' + longitude + ']"><marker position="[' + latitude + ', ' + longitude + ']" title="Violation spot" animation="Animation.BOUNCE"></marker></map>');
-
-        });
-
-        function loadScript() {
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-
-            script.src = 'https://maps.googleapis.com/maps/api/js?v=AIzaSyCzYjvCXkNylxgzNlWHmuWwSmJmWeqm61k&sensor=false&' +
-                    'callback=loadMapWrapper';
-            document.body.appendChild(script);
-        }
-
-        function removeUnsafe() {
-            $('a').each(function() {
-                $(this).attr('href', $(this).attr('href').replace('unsafe:', ''));
-            })
-
-        }
-
-        // workaround to place into callback
-        function loadMapWrapper() {
-            initDisplayMap(latitude, longitude);
-        }
-    </script>
-
     <div class="row">
-        <div class="col-md-9">
-
+        <div class="col-md-5">
+            <div class="row">
+                <div id="map_canvas" style="width:400px; height: 300px"></div>
+            </div>
+            <br>
+            <div class="row">
+                <div  ng-repeat="image in complaint.images" class="col-md-3">
+                    <a href="{{image.data}}" class="thumbnail compImages"
+                       target="_blank"><img class="img-responsive"
+                                            src="{{image.data}}" title="{{image.title}}"></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
             <dl>
                 <dt>Episode:</dt>
                 <dd>{{complaint.episodeName}}</dd>
@@ -67,33 +34,21 @@
                 <br><br>
                 <dt>Description:</dt>
                 <dd>{{complaint.description}}</dd>
-                <dt>Location:</dt>
-                <dd>
-                    <div id="map_canvas" style="width:400px; height: 300px"></div>
-                </dd>
                 <div id="mapHolder">
                     <div id="locHolder" style="display: none">
                         <span id="lat">{{complaint.locationLatitude}}</span>
                         <span id="lng">{{complaint.locationLongitude}}</span>
                     </div>
                 </div>
-
-                <dt>Images:
-                <dd>
-                    <div class="row">
-
-
-                        <div class="col-xs-3">
-                            <a ng-repeat="image in complaint.images" href="{{image.data}}" class="thumbnail compImages"target="_blank"><img class="img-responsive"
-                                                    src="{{image.data}}" title="{{image.title}}"></a>
-                        </div>
-
-                    </div>
-                </dd>
-                </dt>
             </dl>
         </div>
-
     </div>
-
+      <script>
+          function loadMapWrapper() {
+              initDisplayMap($('#lat').text(), $('#lng').text());
+              $('a').each(function () {
+                  $(this).attr('href', $(this).attr('href').replace('unsafe:', ''));
+              })
+          }
+      </script>
 </div>

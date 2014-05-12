@@ -23,7 +23,7 @@
     // 	$('input[type=file]').bootstrapFileInput();
     // 	$('.file-inputs').bootstrapFileInput();
 </script>
-
+<h1>Provide the information about violation</h1>
 <div class="jumbotron">
 
     <style>
@@ -53,8 +53,6 @@
     </style>
     <form role="form" class="complaint-form" ng-submit="submit()" ng-controller="FormController"
           onsubmit="return(validateComplaintForm())">
-        <h2 style="padding-bottom: 5%" class="form-signin-heading">Provide
-            the information about violation</h2>
         <input name="episodename" ng-model="episodeName" class="form-control" type="text" placeholder="Episode name"
                required autofocus> <input class="form-control"
                                           id="datetimepicker" ng-model="dateTime" placeholder="Date & Time" required
@@ -190,7 +188,7 @@
         }
 
 
-        function FormController($scope, $http, Auth) {
+        function FormController($scope, $http, Auth, $location) {
 
             $scope.submit = function () {
 
@@ -204,6 +202,7 @@
                         data: JSON.stringify(complaintData)
                     }).success(function (data) {
                         console.log(data);  //todo proper redirect
+                        $location.path("/complaint/"+data);
                     });
                 }
             }
